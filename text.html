@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Layered Drawing App</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="mainDIV"> 
+    <div class="dicsecs_All">
+      <div class="divsec1">
+        <div class="divsec1_1">
+          <button onclick="undo()" id="undo">⤺</button>
+          <button onclick="redo()" id="Redo">⤻</button>
+          <button id="penTool">🖋️</button>
+          <button id="eraserTool" >Eraser</button>
+        </div>
+        <div class="divsec1_2">
+          <!-- <button id="rulerTool">Ruler</button> <br> -->
+          <label>Size: <br>
+            <input type="range" id="thicknessSlider" min="0.1" max="250" value="3"> <br>
+          </label>
+          <label>Eraser Opacity: <br> 
+          <input type="range" id="eraserIntensity" min="1" max="100" value="100">
+          </label>
+          <label class="switch">
+            <input type="checkbox"  id="yourCheckboxId">
+            <span class="slider"></span>
+            <div class="hover-info">Enable transformation tool</div>
+          </label> <br>
+          <label for="colorPicker"> Colour:
+            <input type="color" id="colorPicker" value="#000000">
+          </label>
+        </div>
+      </div>
+      <div class="divsec2">
+      <div class="divsec2_1">
+        <div class="shape_large">
+          <div class="header_shapes">
+              <h2>Shapes</h2>
+              <div class="dropdown-icon">▼</div>
+          </div>
+          <div class="buttons-wrapper">
+              <table id="shapes_table">
+                <tr>
+                  <td> <button>ruler</button></td>
+                  <td><button id="lineTool">line</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <button>Triangle</button>
+                  </td>
+                  <td>
+                    <button>Quadrilateral</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button>Circle</button>
+                  </td>
+                  <td>
+                    <button>sphereical</button>
+                  </td>
+                </tr>
+                <tr>
+                  <div class="dv_smarttool" id="dv_smarttool">
+                    <select name="size_verticles" id="size_verticles">
+                      <option disabled selected>Select a shape</option>
+                      <option value="3">Triangle</option>
+                      <option value="4">Quadrilateral</option>
+                      <option value="5">Pentagon</option>
+                      <option value="6">Pentagon</option>
+                      <option value="7">Heptagon</option>
+                      <option value="8">Octagon</option>
+                      <option value="9">Nonagon</option>
+                      <option value="10">Decagon</option>
+                      <option value="11">Decagon</option>
+                      <option value="12">Decagon</option>
+                    </select>
+                  </div>
+                </tr>
+              </table>
+          </div>
+        </div>
+      </div>
+      <div class="divsec2_2">
+        <div class="transformation" id="transformation">
+          <label>
+            Zoom (80%-115%) <br>
+            <input type="range" id="zoomRange" min="0.3" max="1.50" step="0.01" value="1">
+          </label>
+          <label>
+            Rotate(-180°-180°) <br>
+            <input type="range" id="rotateRange" min="-180" max="180" step="1" value="0">
+          </label>
+          <button id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="sub-main-dv">
+        <div class="contain_dra-area" id="contain_dra-area">
+            <div class="container" id="container">
+              <div id="drawingArea">
+              </div>
+            </div>
+        </div>
+        <div class="contain-layer">
+            <div class="add-tool">
+                <!-- <button onclick="addLayer()">Add Layer</button> -->
+                <div class="movelayers">
+                  <button onclick="moveLayerUp()" id="moveLayerUp">↥</button>
+                  <button onclick="moveLayerDown()">↧</button>
+                </div>
+                <button onclick="removeLayer()">Remove Layer</button>
+                <div class="export_div">
+                  <h6>select export</h6>
+                  <button onclick="saveImage()"id="saveImage_png" >save as png</button>
+                  <button onclick="downloadORA()">save as ora</button>
+                  <button>save as json</button>
+                </div>
+                <!-- <button onclick="saveImage()">Export</button> -->
+                <div class="dv_import">
+                  <input type="file" title="choose a image" id="imageInput" onchange="pressed()" accept="image/*">
+                  <p id="name_file">No file</p>
+                </div>
+            </div>
+            <div id="layerPanel">
+                <h3 id="layersId">Layers <button onclick="addLayer()">+</button></h3>
+                <div id="layerList">
+                    <div class="div-preview"></div>
+                </div>
+            </div>
+        </div>
+    </div> 
+  </div> 
+
+  <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ================================================================================================================ -->
+  <div id="imageUploadAlert">
+    <div class="preview-container">
+      <canvas id="previewCanvas" width="800" height="800"></canvas>
+      <canvas id="overlayCanvas" width="800" height="800" style="pointer-events: none;"></canvas>
+    </div>
+
+    <div class="controls">
+      <div class="filter-control"><label>Opacity</label><input type="range" id="opacityRange" min="0" max="1" step="0.01" value="1"></div>
+      <div class="filter-control"><label>Zoom</label><input type="range" id="zoomRange" min="0.1" max="3" step="0.1" value="1"></div>
+      <div class="filter-control"><label>Rotation</label><input id="rotationRange" type="range" min="0" max="360" step="1" value="0"></div>
+      <div class="filter-control"><label>Blur</label><input type="range" id="blurRange" min="0" max="20" step="1" value="0"></div>
+      <div class="filter-control"><label>Brightness</label><input type="range" id="brightnessRange" min="0" max="200" step="1" value="100"></div>
+      <div class="filter-control"><label>Contrast</label><input type="range" id="contrastRange" min="0" max="200" step="1" value="100"></div>
+      <div class="filter-control"><label>Grayscale</label><input type="range" id="grayscaleRange" min="0" max="100" step="1" value="0"></div>
+      <div class="filter-control"><label>Hue Rotate</label><input type="range" id="hueRange" min="0" max="360" step="1" value="0"></div>
+      <div class="filter-control"><label>Invert</label><input type="range" id="invertRange" min="0" max="100" step="1" value="0"></div>
+      <div class="filter-control"><label>Saturate</label><input type="range" id="saturateRange" min="0" max="500" step="1" value="100"></div>
+      <div class="filter-control"><label>Sepia</label><input type="range" id="sepiaRange" min="0" max="100" step="1" value="0"></div>
+      <button id="applyImage">Apply</button>
+      <button onclick="closeAlert()">Cancel</button>
+    </div>
+  </div>
+  <button id="chatbot-button">💬</button>
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">Our License</div>
+    <div id="chatbot-body">
+      <p><em>
+        Copyright (c) 2025 Zaxly <br> <br>
+
+All rights reserved. <br> <br>
+
+This website and its source code are the intellectual property of Zaxly.
+You may use this site to upload, create, modify, and export images for personal
+or commercial use. <br>
+<br>
+However, you are NOT permitted to: <br>
+- Copy or clone the website or its code <br>
+- Redistribute the website, in part or in full <br>
+- Host or reproduce this platform on another domain or service <br> <br>
+
+By using this website, you agree to these terms. <br>
+
+For questions or permissions beyond these terms, contact the author directly. <br> email: zaxly.example@gamil.com      </em></p>
+    </div>
+  </div>
+  <script src="transformation.js"></script>
+  <script>
+    window.pressed = function(){
+    var a = document.getElementById('imageInput');
+        if(a.value == "")
+        {
+            name_file.innerHTML = "Choose file";
+        }
+        else
+        {
+            var theSplit = a.value.split('\\');
+            name_file.innerHTML = theSplit[theSplit.length-1];
+        }
+    };
+  </script>
+  <script>
+    const toggleButton = document.getElementById('chatbot-button');
+    const chatbot = document.getElementById('chatbot-container');
+
+    toggleButton.addEventListener('click', () => {
+      chatbot.style.display = chatbot.style.display === 'none' || chatbot.style.display === '' 
+        ? 'flex' 
+        : 'none';
+    });
+  </script>
+</body>
+</html>
