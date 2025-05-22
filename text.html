@@ -89,7 +89,7 @@
           <label>
             Zoom (80%-115%) <br>
             <input type="range" id="zoomRange" min="0.3" max="1.50" step="0.01" value="1">
-          </label>
+          </label> <br>
           <label>
             Rotate(-180°-180°) <br>
             <input type="range" id="rotateRange" min="-180" max="180" step="1" value="0">
@@ -111,9 +111,10 @@
                 <!-- <button onclick="addLayer()">Add Layer</button> -->
                 <div class="movelayers">
                   <button onclick="moveLayerUp()" id="moveLayerUp">↥</button>
-                  <button onclick="moveLayerDown()">↧</button>
+                  <button onclick="moveLayerDown()" id="moveLayerDown">↧</button>
+                  <button onclick="removeLayer()" id="Delete_Ly">Del-ly</button>
                 </div>
-                <button onclick="removeLayer()">Remove Layer</button>
+                <!-- <button onclick="removeLayer()">Remove Layer</button> -->
                 <div class="export_div">
                   <h6>select export</h6>
                   <button onclick="saveImage()"id="saveImage_png" >save as png</button>
@@ -209,5 +210,12 @@ For questions or permissions beyond these terms, contact the author directly. <b
         : 'none';
     });
   </script>
+  <script>
+    function syncInputs(val) {
+      const number = document.getElementById('numberInput');
+      number.value = val;
+    }
+  </script>
 </body>
 </html>
+
