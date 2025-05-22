@@ -142,27 +142,38 @@ function createsettingtool(){
 
     const toolPanelHTML = `
         <div class="cansetTool">
-        <table>
-            <tr>
+            <table>
+                <tr>
+                    <td>
+                        <button class="Duplicate_layer">Duplicate</button>
+                    </td>
                 <td>
-                    <button class="btn1"></button>
-                </td>
-                <td>
-                    <button class="btn3"></button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button class="btn2"></button>
-                </td>
-                <td>
-                    <button class="btn4">
-                        <input type="color" id="layer_color_picker" value="transparent">
+                    <button class="hide_layer">
+                        hide
                     </button>
                 </td>
-            </tr>
-        </table>
-    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="reset_layer">Reset</button>
+                    </td>
+                    <td>
+                        <button class="bg_layer">bg</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="color" class="layer_color_picker" value="transparent">
+                    </td>
+                    <td>
+                        <div class="input_group">
+                            <label for="numberInput">Opacity:</label><br>
+                            <input type="number" class="numberInput" min="1" max="100" value="100" oninput="syncInputs(this.value)">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         `;
         const wrapper = document.createElement('div');
         wrapper.innerHTML = toolPanelHTML.trim();
