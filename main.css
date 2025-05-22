@@ -118,7 +118,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 290px;
   right: 0px;
   top: 0px;
   padding: 5px;
@@ -126,9 +126,10 @@ body {
   backdrop-filter: blur(6px);
 }
 #transformation{
-  background-color: rgb(196, 165, 165);
-  width: 50%;
-  height: 100%;
+  background-color: rgba(157, 162, 157, 0.539);
+  backdrop-filter: blur(5px);
+  width: 180px;
+  height: 98px;
 }
 #drawingArea {
   height: 800px;
@@ -212,16 +213,24 @@ body {
   width: 40%;
   height: 100%;
   border-radius: 2px;
-  font-size: 25px;
   background-color: transparent;
   color: green;
   font-weight: bolder;
   border: none;
 }
+.movelayers > button:nth-child(1), .movelayers > button:nth-child(2){
+  font-size: 25px;
+}
+#Delete_Ly{
+  font-size: 10px;
+  color: black;
+}
 #layersId{
+  width: 100%;
   background: #01661200;
   display: flex;
-  position: relative;
+  position: absolute;
+  top: 0px;
   height: 30px;
   border-radius: 1px;
   border-bottom: 2px solid gray;
@@ -238,13 +247,17 @@ body {
   border: none;
   cursor: pointer;
 }
-#moveLayerUp{
+#moveLayerUp, #moveLayerDown{
+  font-size: 25px;
   border-right: 2px solid rgb(167, 165, 165);
 }
+
  #layerPanel{
+  position: relative;
+  padding-top: 50px;
   height: calc(100% - 250px);
   overflow: scroll;
-  background-color: #0166121a;
+  background-color: #01661200;
  }
 .layer {
   position: absolute;
@@ -667,72 +680,44 @@ button {
 
 /* stsying snavas setting  */
 .cansetTool{
-  height: 90px;
-  width: 110px;
-  background-color: rgba(255, 255, 255, 0);
+  height: 110px;
+  width: 190px;
+  background-color: rgba(185, 28, 28, 0);
   border-radius: 4px;
-  border: 1.5px solid rgb(183, 182, 182);
+  /* border: 1.5px solid rgb(183, 182, 182); */
   display: flex;
   flex-direction: column;
   padding: 0px;
-  margin-top: -12px;
+  margin-top: 1px;
+  border-right: 1.5px solid rgb(165, 162, 162);
 }
-/* .cansetTool h5{
-  margin: 0px;
-  height: 26px;
-  text-align: center;
-  font-size: 16px;
-  background-color: gray;
-  border: 1.4px rgb(205, 202, 202);
-  border-radius: 3px 3px 0px 0px;
-  font-weight: 400;
-} */
-.cansetTool button{
-  border: 1px solid black;
-  border-radius: 2px;
-  background-color: transparent;
-  cursor: pointer;
-}
-.cansetTool table{
-  background-color: #01661200;
+.cansetTool table{ 
+  background-color: #11802300;
   border-collapse: collapse;
   height: 20px;
   padding: 0px;
 }
-.cansetTool tr{
-  background-color: #bebebe00;
+.cansetTool table tr:nth-of-type(1) >  {
+  background-color: #e3090900;
 }
-.cansetTool button:hover{
-  padding: 0px;
-  margin: 0px;
-  margin-top: 1px;
-  background-color: rgba(194, 197, 199, 0);
+.Duplicate_layer, .reset_layer, .layer_color_picker{
+  background-color: transparent;
+  width: 70px;
+  border: 1px solid grey;
+  border-radius: 4px;
 }
-.btn1,  .btn2, .btn3, .btn4{
-  width: 35px;
-  height: 20px;
+.hide_layer, .bg_layer, .input_group{
+  background-color: transparent;
+  width: 50px;
+  border: 1px solid grey;
+  border-radius: 4px;
 }
-btn1, btn2, btn3{
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+.input_group, .layer_color_picker{
+  margin-left: 4px;
 }
-.btn1{
-  background-image: url("clear.png");
+.input_group{
+  border: none;
 }
-.btn3{
-  background-image: url("dup.png");
-}
-.btn2{
-  background-image: url("eye.png");
-}
-.cansetTool tr input{
-  height: 110%;
-  width: 150%;
-  margin-left: -2px;
-}
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////// */
-
 #chatbot-button {
   position: fixed;
   bottom: 20px;
