@@ -1,8 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <head>
   <meta charset="UTF-8">
-  <title>Layered Drawing App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImgEditor — Online AI Image Editor by Zaxly</title>
+
+  <!-- ========================== -->
+  <!-- 💎 BASIC SEO META TAGS -->
+  <!-- ========================== -->
+  <meta name="description" content="ImgEditor is an advanced online AI image editor built by Zaxly. Edit, enhance, crop, resize, filter, and apply AI effects instantly from your browser — free and fast.">
+  <meta name="keywords" content="AI image editor, online photo editor, Zaxly editor, free image editing tool, photo filters, brightness contrast adjust, web photo app, edit image online">
+  <meta name="author" content="Zaxly">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="7 days">
+  <meta name="language" content="en">
+
+  <!-- ========================== -->
+  <!-- 📱 OPEN GRAPH (FACEBOOK, LINKEDIN) -->
+  <!-- ========================== -->
+  <meta property="og:title" content="ImgEditor — Smart AI Image Editor by Zaxly">
+  <meta property="og:description" content="Edit and enhance your photos online with AI-powered tools. Created by Zaxly for fast, secure, and intuitive image editing.">
+  <meta property="og:url" content="https://(your-domain).com">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ImgEditor">
+  <meta property="og:image" content="https://github.com/Zachary-bungei/ImgEditor/blob/main/Screenshot%202025-10-01%20at%2012.26.21.png">
+  <meta property="og:locale" content="en_US">
+
+  <!-- ========================== -->
+  <!-- 🐦 TWITTER CARD META -->
+  <!-- ========================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ImgEditor— AI Image Editing Platform">
+  <meta name="twitter:description" content="Smart web-based photo editor built by Zaxly. Edit, filter, and enhance your images online with AI precision.">
+  <meta name="twitter:image" content="https://zaxlyimgeditor.netlify.app/assets/social-preview.jpg">
+  <meta name="twitter:creator" content="@zaxly">
+
+  <!-- ========================== -->
+  <!-- 💼 BUSINESS CONTACT META -->
+  <!-- ========================== -->
+  <meta name="organization" content="ImgEditor by Zaxly">
+  <meta name="email" content="zaxly@gmail.com">
+  <meta name="telephone" content="+254 0000 0000">
+  <meta name="address" content="Nairobi, kenya)">
+  <meta name="theme-color" content="#0e0e0e">
+
+  <!-- ========================== -->
+  <!-- 🧠 STRUCTURED DATA (JSON-LD) -->
+  <!-- ========================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://zaxlyimgeditor.netlify.app#website",
+        "url": "https://zaxlyimgeditor.netlify.app",
+        "name": "(Your Website Name)",
+        "description": "(Your Website Name) is a next-generation AI-powered image editing platform developed by Zaxly. It allows users to upload, enhance, crop, resize, filter, and download images instantly online.",
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://zaxlyimgeditor.netlify.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://ImgEditor.com/#webapp",
+        "name": "ImgEditor",
+        "operatingSystem": "All",
+        "applicationCategory": "MultimediaApplication",
+        "url": "https://ImgEditor.netlify.app",
+        "image": "https://ImgEditor.netlify.app/assets/app-screenshot.jpg",
+        "screenshot": "https://ImgEditor.netlify.app/assets/app-screenshot.jpg",
+        "browserRequirements": "Requires modern browser with JavaScript enabled",
+        "creator": {
+          "@type": "Person",
+          "name": "Zaxly",
+          "email": "zaxly@gmail.com",
+          "telephone": "+254 0000 0000",
+          "url": "https://ImgEditor.netlify.app/about"
+        },
+        "description": "AI-powered image editor for web. Built by Zaxly to deliver professional image editing features directly from your browser — with real-time previews, drag-and-drop upload, layer blending, and more.",
+        "keywords": [
+          "AI image editor",
+          "AI photo editor",
+          "AI picture enhancer",
+          "ImgEditor",
+          "Zaxly photo editor",
+          "online photo editor",
+          "web-based image editing tool",
+          "photo retouching app",
+          "free image editor",
+          "image enhancement software",
+          "AI-powered photo enhancement",
+          "AI filter generator",
+          "auto background remover",
+          "photo background changer",
+          "smart photo cropper",
+          "image sharpness adjuster",
+          "photo blur remover",
+          "color correction tool",
+          "photo tone adjuster",
+          "auto exposure fix",
+          "contrast and brightness editor",
+          "image saturation control",
+          "AI object remover",
+          "skin smoothening AI",
+          "AI makeup filter",
+          "image resizing online",
+          "rotate flip mirror image",
+          "AI art generator",
+          "photo lighting correction",
+          "AI texture enhancer",
+          "real-time photo filters",
+          "image effects gallery",
+          "photo enhancement API",
+          "AI design editor",
+          "photo sharpening online",
+          "AI clarity enhancer",
+          "photo auto-enhance",
+          "AI colorizer",
+          "black and white to color AI",
+          "AI upscaler",
+          "image quality improver",
+          "HD photo enhancer",
+          "AI noise reduction",
+          "photo cleaner AI",
+          "face retouching online",
+          "photo detail recovery",
+          "crop and resize image",
+          "instant background removal",
+          "image transformation AI",
+          "web image editing suite",
+          "creative design editor",
+          "photo filters and effects",
+          "visual enhancement AI",
+          "drag and drop image editor",
+          "browser-based image editing",
+          "image editing workspace",
+          "AI creative tools",
+          "photo editing website",
+          "real-time image preview",
+          "AI-powered filters",
+          "image stylization app",
+          "photo enhancement online",
+          "AI-powered retouch",
+          "AI portrait enhancement",
+          "smart image optimizer",
+          "photo clarity improvement",
+          "image compression tool",
+          "photo format converter",
+          "photo tint adjustment",
+          "white balance editor",
+          "exposure balance tool",
+          "color balance photo editor",
+          "image masking online",
+          "AI watermark remover",
+          "AI logo creator",
+          "web-based Photoshop alternative",
+          "online creative studio",
+          "digital artwork editor",
+          "image focus adjust",
+          "online canvas editor",
+          "layer blending modes",
+          "multi-layer editing",
+          "AI photo effects",
+          "AI picture beautifier",
+          "web design image tool",
+          "photo cutout maker",
+          "photo background transparency",
+          "AI-powered crop",
+          "image blur and sharpen tool",
+          "contrast boost editor",
+          "AI light correction",
+          "portrait photo editor",
+          "photo cleanup online",
+          "web-based AI creative lab",
+          "AI-driven image transformation",
+          "free browser image editor",
+          "AI image enhancement suite",
+          "Zaxly ImgEditor platform",
+          "fast online photo editor",
+          "secure image editing app",
+          "no signup image editor",
+          "image editor for web",
+          "privacy-safe photo enhancer",
+          "smart filter generator",
+          "photo restoration AI",
+          "AI sky replacement",
+          "face detection image editor",
+          "AI powered brush tool"
+        ],
+        "featureList": [
+          "Instant drag-and-drop image upload",
+          "AI-based auto-enhancement",
+          "Blur, sharpen, contrast, and color balance controls",
+          "Layer management and opacity sliders",
+          "Download edited image instantly",
+          "No data tracking — privacy first"
+        ],
+        "softwareVersion": "(v1.0 or your current version)",
+        "releaseNotes": "(Brief note on latest release or update)",
+        "permissions": "Camera, File Access (for local editing only)"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://ImgEditor.netlify.app/#organization",
+        "name": "ImgEditor by Zaxly",
+        "url": "https://ImgEditor.netlify.app",
+        "logo": "https://ImgEditor.netlify.app/assets/logo.png",
+        "founder": {
+          "@type": "Person",
+          "name": "Zaxly",
+          "email": "zaxly@gmail.com",
+          "telephone": "+254 0000 0000"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/ImgEditor/",
+          "https://twitter.com/ImgEditor",
+          "https://github.com/ImgEditor",
+          "https://www.instagram.com/ImgEditor/"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "zaxly@gmail.com",
+          "telephone": "+254 0000 0000",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["English"]
+        }
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://ImgEditor.netlify.app/#creativework",
+        "name": "AI Image Editing Tutorials and Guides",
+        "creator": {
+          "@type": "Person",
+          "name": "Zaxly"
+        },
+        "about": "Detailed tutorials and documentation on using the AI-powered image editor effectively.",
+        "genre": "Educational",
+        "inLanguage": "en",
+        "url": "https://ImgEditor.netlify.app.com/docs",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "dateCreated": "2024-04-08",
+        "dateModified": "2025-10-9",
+        "version": "1.0.1",
+        "keywords": [
+          "image editing tutorials",
+          "AI photo guides",
+          "learn online editor"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ========================== -->
+  <!-- 🌐 EXTRA SEO DETAILS -->
+  <!-- ========================== -->
+  <link rel="canonical" href="https://ImgEditor.netlify.app">
+  <link rel="icon" href="Screenshot 2025-10-01 at 12.26.21.png" type="image/x-icon">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="application-name" content="ImgEditor">
+  <meta name="apple-mobile-web-app-title" content="ImgEditor">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- ========================== -->
+  <!-- 📊 ANALYTICS (optional) -->
+  <!-- ========================== -->
+  <!-- Add your Google Analytics, Plausible, or Umami code here -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link rel="stylesheet" href="main.css">
 </head>
