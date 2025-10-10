@@ -10,17 +10,20 @@
   <!-- ========================== -->
   <meta name="description" content="ImgEditor is an advanced online AI image editor built by Zaxly. Edit, enhance, crop, resize, filter, and apply AI effects instantly from your browser — free and fast.">
   <meta name="keywords" content="AI image editor, online photo editor, Zaxly editor, free image editing tool, photo filters, brightness contrast adjust, web photo app, edit image online">
-  <meta name="author" content="Zaxly">
+  <meta name="author" content="Zacharia Bungei">
   <meta name="robots" content="index, follow">
   <meta name="revisit-after" content="7 days">
-  <meta name="language" content="en">
+  <link rel="alternate" href="https://example.com/en/" hreflang="en" />
+  <link rel="alternate" href="https://example.com/fr/" hreflang="fr" />
+  <link rel="alternate" href="https://example.com/es/" hreflang="es" />
+
 
   <!-- ========================== -->
   <!-- 📱 OPEN GRAPH (FACEBOOK, LINKEDIN) -->
   <!-- ========================== -->
-  <meta property="og:title" content="ImgEditor — Smart AI Image Editor by Zaxly">
+  <meta property="og:title" content="ImgEditor — Smart AI Image Editor by zaxly">
   <meta property="og:description" content="Edit and enhance your photos online with AI-powered tools. Created by Zaxly for fast, secure, and intuitive image editing.">
-  <meta property="og:url" content="https://(your-domain).com">
+  <meta property="og:url" content="https://zaxlyimgeditor.netlify.app/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ImgEditor">
   <meta property="og:image" content="https://github.com/Zachary-bungei/ImgEditor/blob/main/Screenshot%202025-10-01%20at%2012.26.21.png">
@@ -41,7 +44,7 @@
   <meta name="organization" content="ImgEditor by Zaxly">
   <meta name="email" content="zaxly@gmail.com">
   <meta name="telephone" content="+254 0000 0000">
-  <meta name="address" content="Nairobi, kenya)">
+  <meta name="address" content="(Nairobi, kenya)">
   <meta name="theme-color" content="#0e0e0e">
 
   <!-- ========================== -->
@@ -55,8 +58,8 @@
         "@type": "WebSite",
         "@id": "https://zaxlyimgeditor.netlify.app#website",
         "url": "https://zaxlyimgeditor.netlify.app",
-        "name": "(Your Website Name)",
-        "description": "(Your Website Name) is a next-generation AI-powered image editing platform developed by Zaxly. It allows users to upload, enhance, crop, resize, filter, and download images instantly online.",
+        "name": "ImgEditor",
+        "description": "ImgEditor is a next-generation AI-powered image editing platform developed by Zaxly. It allows users to upload, enhance, crop, resize, filter, and download images instantly online.",
         "inLanguage": "en",
         "potentialAction": {
           "@type": "SearchAction",
@@ -200,14 +203,14 @@
           "Download edited image instantly",
           "No data tracking — privacy first"
         ],
-        "softwareVersion": "(v1.0 or your current version)",
+        "softwareVersion": "1.0.1",
         "releaseNotes": "(Brief note on latest release or update)",
         "permissions": "Camera, File Access (for local editing only)"
       },
       {
         "@type": "Organization",
         "@id": "https://ImgEditor.netlify.app/#organization",
-        "name": "ImgEditor by Zaxly",
+        "name": "ImgEditor",
         "url": "https://ImgEditor.netlify.app",
         "logo": "https://ImgEditor.netlify.app/assets/logo.png",
         "founder": {
@@ -240,7 +243,7 @@
           "name": "Zaxly"
         },
         "about": "Detailed tutorials and documentation on using the AI-powered image editor effectively.",
-        "genre": "Educational",
+        "genre": "arts",
         "inLanguage": "en",
         "url": "https://ImgEditor.netlify.app.com/docs",
         "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -262,7 +265,7 @@
   <!-- ========================== -->
   <link rel="canonical" href="https://ImgEditor.netlify.app">
   <link rel="icon" href="cryptochat.png" type="image/x-icon">
-  <link rel="manifest" href="/manifest.json">
+  <!-- <link rel="manifest" href="/manifest.json"> -->
   <meta name="application-name" content="ImgEditor">
   <meta name="apple-mobile-web-app-title" content="ImgEditor">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -273,7 +276,6 @@
   <!-- Add your Google Analytics, Plausible, or Umami code here -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link rel="stylesheet" href="./main.css">
@@ -284,44 +286,37 @@
         <div class="contain_dra-area" id="contain_dra-area">
             <div class="container" id="container">
               <div id="drawingArea">
-                <!-- <div class="zoombtn" id="zoombtn"><i class="material-icons">zoom_out_map</i></div> -->
               </div>
               <div id="trackerDiv">
-                <label for="zoom">Zoom
-                  <input type="range">
+                <label for="zoom" id="IdZoom"> Zoom
+                  <input type="range" id="ZoomRange" min="0.3" max="1.50" step="0.01" value="1">
                 </label>
-                <label for="Angle: 0°">
+                <label for="Angle: 0" id="Angle98">
+                  <p id="angleshower">100</p>
                   <div class="circle12" id="circle12">
-                    <div class="dot12" id="dot12"></div>
+                    <div class="circle13" id="circle13">
+                      <div class="dot12" id="dot12">
+                      </div>
+                    </div>
                   </div>
                 </label>
+                <button class="resettrans">
+                  <span class="material-symbols-outlined"> <b>restart_alt</b></span>
+                </button>
               </div>
-              <button class="resettrans">
-                <span class="material-symbols-outlined">restart_alt</span>
-              </button>
             </div>
         </div>
         <div class="contain-layer">
           <butotn class="latyer_at_iphone">
-            <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span>
+            <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span> layers
           </butotn>
             <div class="add-tool">
-                <!-- <button onclick="addLayer()">Add Layer</button> -->
-                <div class="movelayers">
-                  <button onclick="moveLayerUp()" id="moveLayerUp">↥</button>
-                  <button onclick="moveLayerDown()" id="moveLayerDown">↧</button>
-                  <button onclick="removeLayer()" id="Delete_Ly">Del-ly</button>
-                </div>
                 <div class="export_div">
-                  <h6>select export</h6>
-                  <button onclick="saveImage()"id="saveImage_png" >save as png</button>
-                  <button onclick="downloadORA()">save as ora</button>
-                  <button>save as json</button>
-                </div>
-                <!-- <button onclick="saveImage()">Export</button> -->
-                <div class="dv_import">
-                  <input type="file" title="choose a image" id="imageInput" onchange="pressed()" accept="image/*">
-                  <p id="name_file">No file</p>
+                  <h6>Export</h6>
+                  <button onclick="saveImage()"id="saveImage_png" >Download PNG</button>
+                  <button>Download JPG</button>
+                  <button onclick="downloadORA()">Download ORA</button>
+                  <button>Download JSON</button>
                 </div>
             </div>
             <div id="layerPanel">
@@ -331,31 +326,109 @@
                 </div>
             </div>
         </div>
+        <div class="layers_set" id="layers_set">
+          <section class="Title_herer" onclick="window.location.href='../index.html'">
+            <img src="../images/cryptochat.png"  width="30px" height="35px" alt="">
+            <b>ImgEditor</b>
+          </section>
+          <div class="set_bar">
+            <div class="setting-item">
+              <button title="Hide / Show">
+                <span class="material-symbols-outlined">visibility_off</span>
+              </button>
+              <div class="setting-panel">Hide element</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Opacity">
+                <span class="material-symbols-outlined">opacity</span>
+              </button>
+              <div class="setting-panel">Opacity control</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Move Up" onclick="moveLayerUp()">
+                <span class="material-symbols-outlined">arrow_upward</span>
+              </button>
+              <div class="setting-panel">Move element up</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Move Down" onclick="moveLayerDown()">
+                <span class="material-symbols-outlined">arrow_downward</span>
+              </button>
+              <div class="setting-panel">Move element down</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Duplicate">
+                <span class="material-symbols-outlined">content_copy</span>
+              </button>
+              <div class="setting-panel">Duplicate layer</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Delete" onclick="removeLayer()">
+                <span class="material-symbols-outlined">delete</span>
+              </button>
+              <!-- <div class="setting-panel">Delete layer</div> -->
+            </div>
+          
+            <div class="setting-item">
+              <button title="Reset">
+                <span class="material-symbols-outlined">restart_alt</span>
+              </button>
+              <div class="setting-panel">Reset properties</div>
+            </div>
+          
+            <div class="setting-item">
+              <button title="Background Color">
+                <span class="material-symbols-outlined">format_color_fill</span>
+              </button>
+              <div class="setting-panel">Change background color</div>
+            </div>
+
+            <div class="setting-item">
+              <button title="Upload File" id="Upload_File">
+                <span class="material-symbols-outlined">upload_file</span>
+              </button>
+              <div class="setting-panel">
+                <input type="file" title="choose a image" id="imageInput" onchange="pressed()" accept="image/*">
+              </div>
+            </div>
+            <button>
+              <span class="material-symbols-outlined" ><b>cancel</b></span>
+            </button>
+          </div>
+        </div>
     </div> 
   </div> 
 
   <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ================================================================================================================ -->
   <div id="imageUploadAlert">
-    <div class="preview-container">
-      <canvas id="previewCanvas" width="800" height="800"></canvas>
-      <canvas id="overlayCanvas" width="800" height="800" style="pointer-events: none;"></canvas>
-    </div>
-
-    <div class="controls">
-      <div class="filter-control"><label>Opacity</label><input type="range" id="opacityRange" min="0" max="1" step="0.01" value="1"></div>
-      <div class="filter-control"><label>Zoom</label><input type="range" id="zoomRange" min="0.1" max="3" step="0.1" value="1"></div>
-      <div class="filter-control"><label>Rotation</label><input id="rotationRange" type="range" min="0" max="360" step="1" value="0"></div>
-      <div class="filter-control"><label>Blur</label><input type="range" id="blurRange" min="0" max="20" step="1" value="0"></div>
-      <div class="filter-control"><label>Brightness</label><input type="range" id="brightnessRange" min="0" max="200" step="1" value="100"></div>
-      <div class="filter-control"><label>Contrast</label><input type="range" id="contrastRange" min="0" max="200" step="1" value="100"></div>
-      <div class="filter-control"><label>Grayscale</label><input type="range" id="grayscaleRange" min="0" max="100" step="1" value="0"></div>
-      <div class="filter-control"><label>Hue Rotate</label><input type="range" id="hueRange" min="0" max="360" step="1" value="0"></div>
-      <div class="filter-control"><label>Invert</label><input type="range" id="invertRange" min="0" max="100" step="1" value="0"></div>
-      <div class="filter-control"><label>Saturate</label><input type="range" id="saturateRange" min="0" max="500" step="1" value="100"></div>
-      <div class="filter-control"><label>Sepia</label><input type="range" id="sepiaRange" min="0" max="100" step="1" value="0"></div>
-      <button id="applyImage">Apply</button>
-      <button onclick="closeAlert()">Cancel</button>
+    <div class="coverscreen_imageUploadAlert">
+      <div class="preview-container">
+        <canvas id="previewCanvas" width="800" height="800"></canvas>
+        <canvas id="overlayCanvas" width="800" height="800" style="pointer-events: none;"></canvas>
+      </div>
+      <div class="controls">
+        <div class="filter-control"><label>Opacity</label><input type="range" id="opacityRange" min="0" max="1" step="0.01" value="1"></div>
+        <div class="filter-control"><label>Zoom</label><input type="range" id="zoomRange" min="0.1" max="3" step="0.1" value="1"></div>
+        <div class="filter-control"><label>Rotation</label><input id="rotationRange" type="range" min="0" max="360" step="1" value="0"></div>
+        <div class="filter-control"><label>Blur</label><input type="range" id="blurRange" min="0" max="20" step="1" value="0"></div>
+        <div class="filter-control"><label>Brightness</label><input type="range" id="brightnessRange" min="0" max="200" step="1" value="100"></div>
+        <div class="filter-control"><label>Contrast</label><input type="range" id="contrastRange" min="0" max="200" step="1" value="100"></div>
+        <div class="filter-control"><label>Grayscale</label><input type="range" id="grayscaleRange" min="0" max="100" step="1" value="0"></div>
+        <div class="filter-control"><label>Hue Rotate</label><input type="range" id="hueRange" min="0" max="360" step="1" value="0"></div>
+        <div class="filter-control"><label>Invert</label><input type="range" id="invertRange" min="0" max="100" step="1" value="0"></div>
+        <div class="filter-control"><label>Saturate</label><input type="range" id="saturateRange" min="0" max="500" step="1" value="100"></div>
+        <div class="filter-control"><label>Sepia</label><input type="range" id="sepiaRange" min="0" max="100" step="1" value="0"></div>
+        <div class="respnseImg">
+          <button id="applyImage">Apply</button>
+        <button onclick="closeAlert()" id="cancelImge">Cancel</button>
+        </div>
+      </div>
     </div>
   </div>
   <button id="chatbot-button">
@@ -397,15 +470,15 @@ For questions or permissions beyond these terms, contact the author directly. <b
         <div class="editortool" id="editortool">
           <div class="editortool1" id="editortool1">
             <button class="editorchoice">
-              <span class="material-symbols-outlined" title="Brush Tool">brush</span>
+              <span class="material-symbols-outlined" title="Brush Tool"> <b>brush</b></span>
             </button>
             <div class="floatereditor">
               <div class="focuseditor">
                 <button id="penTool">
-                  <span class="material-symbols-outlined" title="Pen Tool">ink_pen</span>
+                  <span class="material-symbols-outlined" title="Pen Tool"><b>ink_pen</b></span>
                 </button>
                 <button id="eraserTool" >
-                  <span class="material-symbols-outlined" title="Eraser Tool">ink_eraser</span>
+                  <span class="material-symbols-outlined" title="Eraser Tool"><b>ink_eraser</b></span>
                 </button>
               </div>
               <div class="more_focuseditor" id="more_focuseditor">
@@ -429,7 +502,7 @@ For questions or permissions beyond these terms, contact the author directly. <b
         </div>
         <div class="eng_trans">
           <button>
-            <i class="material-icons">zoom_out_map</i>
+            <i class="material-icons"><b>zoom_out_map</b></i>
           </button>
           <div class="transformation" id="transformation">
             <label>
@@ -445,55 +518,48 @@ For questions or permissions beyond these terms, contact the author directly. <b
         </div>
         <div class="transformationshapes" id="transformationshapes">
           <button class="shapes">
-            <i class="material-symbols-outlined">pentagon</i>
+            <i class="material-symbols-outlined"><b>pentagon</b></i>
           </button>
           <div class="trans_materisl">
             <div class="buttons-wrapper">
-              <table id="shapes_table">
+              <table id="shapes_table" style="border-collapse: collapse; width:100%; text-align:center;">
                 <tr>
-                  <td> <button>ruler</button></td>
-                  <td><button id="lineTool">line</button></td>
+                  <td><button title="Ruler"><span class="material-symbols-outlined">straighten</span></button></td>
+                  <td><button title="Line"><span class="material-symbols-outlined">show_chart</span></button></td>
+                  <td><button title="Circle"><span class="material-symbols-outlined">radio_button_unchecked</span></button></td>
+                  <td><button title="Ellipse"><span class="material-symbols-outlined">trip_origin</span></button></td>
                 </tr>
                 <tr>
-                  <td>
-                    <button>Triangle</button>
-                  </td>
-                  <td>
-                    <button>Quadrilateral</button>
-                  </td>
+                  <td><button title="Triangle"><span class="material-symbols-outlined">change_history</span></button></td>
+                  <td><button title="Square / Quadrilateral"><span class="material-symbols-outlined">crop_square</span></button></td>
+                  <td><button title="Pentagon"><span class="material-symbols-outlined">pentagon</span></button></td>
+                  <td><button title="Hexagon"><span class="material-symbols-outlined">hexagon</span></button></td>
                 </tr>
                 <tr>
-                  <td>
-                    <button>Circle</button>
-                  </td>
-                  <td>
-                    <button>sphereical</button>
-                  </td>
+                  <td><button title="Heptagon"><span class="material-symbols-outlined">category</span></button></td>
+                  <td><button title="Octagon"><span class="material-symbols-outlined">stop</span></button></td>
+                  <td><button title="Nonagon"><span class="material-symbols-outlined">pentagon</span></button></td>                  
+                  <td><button title="Decagon"><span class="material-symbols-outlined">contrast_circle</span></button></td>
                 </tr>
                 <tr>
-                  <div class="dv_smarttool" id="dv_smarttool">
-                    <select name="size_verticles" id="size_verticles">
-                      <option disabled selected>Select a shape</option>
-                      <option value="3">Triangle</option>
-                      <option value="4">Quadrilateral</option>
-                      <option value="5">Pentagon</option>
-                      <option value="6">Pentagon</option>
-                      <option value="7">Heptagon</option>
-                      <option value="8">Octagon</option>
-                      <option value="9">Nonagon</option>
-                      <option value="10">Decagon</option>
-                      <option value="11">Decagon</option>
-                      <option value="12">Decagon</option>
-                    </select>
-                  </div>
+                  <td><button title="Sphere"><span class="material-symbols-outlined">circle</span></button></td>
+                  <td><button title="Cylinder"><span class="material-symbols-outlined">vertical_align_bottom</span></button></td>
+                  <td><button title="Cone"><span class="material-symbols-outlined">change_history</span></button></td>
+                  <td><button title="Pyramid"><span class="material-symbols-outlined">terrain</span></button></td>
+                </tr>
+                <tr>
+                  <td><button title="Cube"><span class="material-symbols-outlined">view_in_ar</span></button></td>
+                  <td><button title="Rectangular Prism"><span class="material-symbols-outlined">category</span></button></td>
+                  <td><button title="Torus"><span class="material-symbols-outlined">donut_large</span></button></td>
+                  <td><button title="Star"><span class="material-symbols-outlined">star</span></button></td>
                 </tr>
               </table>
-          </div>
+            </div>
           </div>
         </div>
         <div class="rulerstyle">
           <button class="ruler1_1">
-            <span class="material-symbols-outlined" title="Show Rulers">straighten</span>
+            <span class="material-symbols-outlined" title="Show Rulers"><b>straighten</b></span>
           </button>
           <div class="ruler-toolbar">
             <span class="material-symbols-outlined" title="Show Rulers">straighten</span>
@@ -508,7 +574,7 @@ For questions or permissions beyond these terms, contact the author directly. <b
         </div>
         <div class="colorAutopicker" id="colorAutopicker">
           <button>
-            <span class="material-symbols-outlined" title="Pick a Color">palette</span>
+            <span class="material-symbols-outlined" title="Pick a Color"><b>palette</b></span>
           </button>
           <div class="color-picker-toolbar">
             <!-- Pure Color -->
@@ -562,25 +628,54 @@ For questions or permissions beyond these terms, contact the author directly. <b
         </div>
         <div class="backfilter">
           <button class="backfilterbtn">
-            <span class="material-symbols-outlined" title="Backdrop Filters">blur_on</span>
+            <span class="material-symbols-outlined" title="Backdrop Filters"><b>blur_on</b></span>
           </button>
           <div class="backdrop-filters-toolbar">
-            <button title="Blur"><span class="material-symbols-outlined">blur_on</span></button>
-            <button title="Brightness"><span class="material-symbols-outlined">brightness_6</span></button>
-            <button title="Contrast"><span class="material-symbols-outlined">tune</span></button>
-            <button title="Grayscale"><span class="material-symbols-outlined">filter_b_and_w</span></button>
-            <button title="Hue Rotate"><span class="material-symbols-outlined">color_lens</span></button>
-            <button title="Saturation"><span class="material-symbols-outlined">filter_vintage</span></button>
-            <button title="Backdrop"><span class="material-symbols-outlined">blur_linear</span></button>
+            <button title="Blur">
+              <span class="material-symbols-outlined">blur_on</span> 
+              <b>
+                Blurring
+              </b>
+            </button>
+            <button title="Brightness">
+              <span class="material-symbols-outlined">brightness_6</span>
+              <b>Brightness</b>
+            </button>
+            <button title="Contrast">
+              <span class="material-symbols-outlined">tune</span>
+              <b>
+                Contrast
+              </b>
+            </button>
+            <button title="Grayscale">
+              <span class="material-symbols-outlined">filter_b_and_w</span>
+              <b>Contrast</b>
+            </button>
+            <button title="Hue Rotate">
+              <span class="material-symbols-outlined">color_lens</span>
+              <b>
+                Hue Rotate
+              </b>
+            </button>
+            <button title="Saturation">
+              <span class="material-symbols-outlined">filter_vintage</span>
+              <b>
+                Saturation
+              </b>
+            </button>
+            <button title="Backdrop">
+              <span class="material-symbols-outlined">blur_linear</span>
+              <b>Backdrop</b>
+            </button>
           </div>
           
         </div>
         <butotn class="latyer_at_phone">
-          <span class="material-symbols-outlined" title="Merge Layers">layers</span>
+          <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span>
         </butotn>
     </div>
   </div>
-  <script src="transformation.js"></script>
+  <script src="./transformation.js"></script>
   <script>
     window.pressed = function(){
     var a = document.getElementById('imageInput');
@@ -611,6 +706,52 @@ For questions or permissions beyond these terms, contact the author directly. <b
       number.value = val;
     }
   </script>
-
+  <script>
+    const circle = document.getElementById("circle13");
+    const dot = document.getElementById("dot12");
+    const angleDisplay = document.getElementById("angleshower");
+    const wrapper = document.getElementById(".circle13");
+  
+    let isDragging = false;
+  
+    const radius = 80; // circle radius (half of 160px)
+    const center = { x: 100, y: 100 }; // center of wrapper
+  
+    wrapper.addEventListener("mousedown", (e) => {
+      if (e.target === dot) {
+        isDragging = true;
+      }
+    });
+  
+    window.addEventListener("mouseup", () => (isDragging = false));
+  
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+  
+      const rect = wrapper.getBoundingClientRect();
+      const cx = rect.left + center.x;
+      const cy = rect.top + center.y;
+  
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+  
+      // Calculate rotation angle
+      let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      angle += 90; // rotate top to start
+  
+      // Apply rotation
+      circle.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+  
+      // Update angle display
+      angleDisplay.textContent = `Angle: ${Math.round(angle)}°`;
+    });
+  </script>
+  <script>
+    const Upload_File = document.getElementById("Upload_File");
+    const imageInput44 = document.getElementById("imageInput");
+    Upload_File.addEventListener("click", function(){
+      imageInput44.click();
+    });
+  </script>
 </body>
 </html>
