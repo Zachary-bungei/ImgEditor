@@ -142,39 +142,41 @@ function createsettingtool(){
 
     const toolPanelHTML = `
         <div class="cansetTool">
-            <table>
-                <tr>
-                    <td>
-                        <button class="Duplicate_layer">Duplicate</button>
-                    </td>
-                <td>
-                    <button class="hide_layer">
-                        hide
-                    </button>
-                </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="reset_layer">Reset</button>
-                    </td>
-                    <td>
-                        <button class="bg_layer">bg</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="color" class="layer_color_picker" value="transparent">
-                    </td>
-                    <td>
-                        <div class="input_group">
-                            <label for="numberInput">Opacity:</label><br>
-                            <input type="number" class="numberInput" min="1" max="100" value="100" oninput="syncInputs(this.value)">
-                        </div>
-                    </td>
-                </tr>
-            </table>
         </div>
         `;
+    //     <div class="cansetTool">
+    //     // <table>
+    //     //     <tr>
+    //     //         <td>
+    //     //             <button class="Duplicate_layer">Duplicate</button>
+    //     //         </td>
+    //     //     <td>
+    //     //         <button class="hide_layer">
+    //     //             hide
+    //     //         </button>
+    //     //     </td>
+    //     //     </tr>
+    //     //     <tr>
+    //     //         <td>
+    //     //             <button class="reset_layer">Reset</button>
+    //     //         </td>
+    //     //         <td>
+    //     //             <button class="bg_layer">bg</button>
+    //     //         </td>
+    //     //     </tr>
+    //     //     <tr>
+    //     //         <td>
+    //     //             <input type="color" class="layer_color_picker" value="transparent">
+    //     //         </td>
+    //     //         <td>
+    //     //             <div class="input_group">
+    //     //                 <label for="numberInput">Opacity:</label><br>
+    //     //                 <input type="number" class="numberInput" min="1" max="100" value="100" oninput="syncInputs(this.value)">
+    //     //             </div>
+    //     //         </td>
+    //     //     </tr>
+    //     // </table>
+    // </div>
         const wrapper = document.createElement('div');
         wrapper.innerHTML = toolPanelHTML.trim();
         return wrapper.firstElementChild;
@@ -262,7 +264,7 @@ function removeLayer() {
 
 document.getElementById("penTool").onclick = () => activeTool = "pen";
 document.getElementById("eraserTool").onclick = () => activeTool = "eraser";
-document.getElementById("lineTool").onclick = () => activeTool = "lineTool";
+// document.getElementById("lineTool").onclick = () => activeTool = "lineTool";
 // document.getElementById("rulerTool").onclick = () => {
 //     activeTool = "ruler";
 //     ruler.style.display = "block";
