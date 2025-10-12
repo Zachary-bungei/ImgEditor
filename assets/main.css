@@ -279,10 +279,10 @@ body {
     border-radius: 1px;
     border-bottom: 2px solid gray;
   }
-  #layersId button{
-    color: black;
-    background-color: transparent;
-    font-size: 24px;
+  #layersId_1{
+    background-color: rgba(255, 0, 0, 0);
+    color: rgb(49, 47, 47);
+    font-size: 32px;
     font-weight: bolder;
     place-self: left;
     display:  flex;
@@ -290,7 +290,14 @@ body {
     right: 4px;
     border: none;
     cursor: pointer;
+    height: 37px;
+    width: 30px;
+    padding: -16px!important;
+    border-radius: 40px;
+    top: -12px;
+    text-align: center;
   }
+
   
    #layerPanel{
     position: relative;
@@ -340,8 +347,9 @@ body {
   .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 24px;
+    width: 55px;
+    height: 30px;
+    margin-top: 10px;
   }
   
   /* Hide default checkbox */
@@ -368,8 +376,8 @@ body {
   .slider::before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
+    height: 22px;
+    width: 22px;
     left: 4px;
     top: 4px;
     background-color: white;
@@ -379,7 +387,7 @@ body {
   
   /* ON state */
   input:checked + .slider {
-    background-color: #016612; /* ON: iOS green */
+    background-color: #c0223d; /* ON: iOS green */
   }
   
   input:checked + .slider::before {
@@ -936,20 +944,37 @@ body {
     flex-direction: row;
     background-color: #181717cf;
     backdrop-filter: blur(90px);
-    border-radius: 20px;
-    height: 35px;
-    width: 240px;
+    border-radius: 60px;
+    height: 48px;
+    width: 290px;
     top: 75px;
     place-self: center;
     align-self: center;
   }
-  .latyer_at_phone{
+  #ZomRot{
+    background-color: #01661200;
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    accent-color: rgb(80, 36, 224)!important;
+    margin-left: 16px;
+  }
+  #ZomRot label{
+    background-color: #00000000;
+    margin: 0px;
+    color: rgb(208, 201, 201);
+    height: 25px;
+  }
+  #ZomRot label input{
+    width: 120px;
+  }
+  /* .latyer_at_phone{
     border: 2px solid rgb(32, 32, 165);
     border-radius: 80px;
     width: 33px;height: 33px;
     color: rgb(60, 60, 200);
     cursor: pointer;
-  }
+  } */
   #Angle98{
     background-color: transparent;
     width: 35px;
@@ -968,7 +993,6 @@ body {
   }
   #IdZoom{
     background-color: transparent;
-    margin-left: 10px;
     font-size: 15px;
     color: rgba(183, 180, 180, 0.86);
   }
@@ -980,60 +1004,60 @@ body {
      height: 30px;
      border: none;
      background-color: transparent;
-     margin-top: 0px;
-     margin-left: 10px;
+     margin-top: 6px;
+     margin-left: 2px;
      cursor: pointer;
   }
   .resettrans > span{
-    font-size: 28px;
+    font-size: 30px;
   }
   /* Base slider */
-#ZoomRange {
+#ZoomRange1 {
   width: 90px;
   height: 30px;
   background: #dddddd00;
   border-radius: 5px;
   outline: none;
-  accent-color: rgb(86, 12, 171);
+  accent-color: rgb(96, 7, 198);
   
 }
-.circle12{
-    position: relative;
-    width: 30px;
-    height: 30px;
-    background-color: #01661200;
-    border-radius: 40px;
+.circle12 {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #999;
+  border-radius: 50%;
+  position: relative;
+  margin: 20px auto;
+}
 
-  }
 .circle13 {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border: 4px solid rgb(170, 164, 164);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg);
-    transition: transform 0s linear;
-  }
-  .dot12 {
-    position: absolute;
-    top: -9px;
-    left: 50%;
-    width: 19px;
-    height: 19px;
-    /* background: rgb(85, 3, 152); */
-    background-image: linear-gradient(45deg, rgb(49, 26, 155), rgb(161, 16, 76));
-    border-radius: 50%;
-    transform: translateX(-50%);
-    cursor: grab;
-  }
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: transform 0s;
+}
 
-  .dot12:active {
-    cursor: grabbing;
-  }
-/* Chrome, Safari, Edge, Opera — Thumb */
+.dot12 {
+  width: 6px;
+  height: 6px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
 
+#angleshower {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
 .latyer_at_iphone{
   width: 100%;
   height: 40px;
@@ -1104,6 +1128,75 @@ Title_herer > img{
 #imageInput{
   display: none;
 }
+.focuseditor{
+  background-color: rgba(185, 180, 180, 0.418);
+  border-radius: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  place-content: space-around;
+  width: 90%;
+
+}
+.focuseditor  button{
+  width: 40%;
+  height: 30px;
+  border-radius: 40px;
+  border: 1px solid black;
+  background-color: transparent;
+  cursor: pointer;
+}
+#Opacity_control_div, #Hide_element_div{
+  position: relative;
+  background-color: #0baac200;
+}
+#Opacity_control_div1, #Hide_element_div1{
+  position: absolute;
+  background-color: #353434;
+  margin-top: -50px;
+  margin-left: 49px;
+  height: 60px;
+  width: 200px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  place-content: center;
+  font-size: 16px;
+  color: rgb(207, 206, 206);
+  accent-color: rgb(104, 54, 191);
+  align-content: center;
+  align-items: center;
+  font-weight: 900;
+  backdrop-filter: blur(9px);
+  
+}
+#Opacity_control_div:hover #Opacity_control_div1, #Opacity_control_div1:hover,
+#Hide_element_div:hover #Hide_element_div1, #Hide_element_div1:hover
+{
+  display: flex;
+}
+#Opacity_control_div1::before, 
+#Hide_element_div1
+{
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 25%;
+  transform: translateX(-50%);
+  transform: rotate(-90deg);
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent transparent #353333 transparent; /* triangle pointing up */
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.1));
+}
+.setting-item{
+  background-color: #016612;
+  margin-top: 3px;
+  height: 7vh;
+  min-height: 40px;
+  max-height: 70px;
+}
+
 
   /* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1115,27 +1208,66 @@ Title_herer > img{
     } */
   }
 
-  @media screen and (min-width: 1170px) {
-    .latyer_at_phone{
+  @media screen and (max-width: 1624px) {
+    .latyer_at_iphone p{
       display: none;
     }
   }
-  @media screen and (max-width: 1169px) {
+  @media screen and (max-width: 1069px) {
     .contain-layer{
-      height: 90%;
-      width: 290px;
+      display: flex;
+      height: 35px;
+      width: 35px;
+      top: 55px;
+      right: 4.5%;
+      border-radius: 50px;
+    }
+    .contain-layer:hover #layerPanel, .contain-layer:hover  .add-tool{
+      display: flex;
+    }
+    #layerPanel, .add-tool{
       display: none;
     }
+    .contain-layer:hover {
+      height: 90%;
+      width: 290px;
+      border-radius: 20px;
+      height: 89vh;
+    }
+    #layers_set{
+      left: 3.5%;
+      top: 55px;
+      height: 55px;
+    }
+    .set_bar{
+      display: none;
+    }
+    #layers_set:hover{
+      height: 92vh;
+    }
+    #layers_set:hover .set_bar{
+      display: flex;
+      flex-direction: column;
+    }
+    .dicsecs_All{
+      top: 8px;
+      height: 42px;
+    }
+    #trackerDiv{
+      top: 55px;
+    }
+
   }
   
 
-  @media screen and (min-width: 1170px) and (max-width: 1624px) {
+  @media screen and (min-width: 1070px) and (max-width: 1624px) {
     #layerPanel, .add-tool{
       display: none;
     }
     .contain-layer{
       height: 40px;
-      width: 90px;
+      width: 40px;
+      border-radius: 50px;
     }
     .contain-layer:hover #layerPanel, .contain-layer:hover  .add-tool{
       display: flex;
@@ -1143,8 +1275,8 @@ Title_herer > img{
     .contain-layer:hover {
       height: 90%;
       width: 290px;
+      border-radius: 20px;
     }
 
   }
-  
   
