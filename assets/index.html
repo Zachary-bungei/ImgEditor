@@ -277,6 +277,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab" ></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation"></script>
 
   <link rel="stylesheet" href="./main.css">
 </head>
@@ -288,27 +293,27 @@
               <div id="drawingArea">
               </div>
               <div id="trackerDiv">
-                <label for="zoom" id="IdZoom"> Zoom
-                  <input type="range" id="ZoomRange" min="0.3" max="1.50" step="0.01" value="1">
-                </label>
-                <label for="Angle: 0" id="Angle98">
-                  <p id="angleshower">100</p>
-                  <div class="circle12" id="circle12">
-                    <div class="circle13" id="circle13">
-                      <div class="dot12" id="dot12">
-                      </div>
-                    </div>
-                  </div>
-                </label>
-                <button class="resettrans">
+                <div id="ZomRot">
+                  <label for="zoom" id="IdZoom"> Zoom
+                    <input type="range" id="ZoomRange1" min="0.3" max="1.50" step="0.01" value="1">
+                  </label>
+                  <label>
+                    Rotate<input type="range" id="rotateRange" min="-180" max="180" step="1" value="0">
+                  </label>
+                </div>
+                <button class="resettrans" id="resettrans">
                   <span class="material-symbols-outlined"> <b>restart_alt</b></span>
                 </button>
+                <label class="switch"><br>
+                  <input type="checkbox"  id="yourCheckboxId">
+                  <span class="slider"></span>
+                </label> <br>
               </div>
             </div>
         </div>
         <div class="contain-layer">
           <butotn class="latyer_at_iphone">
-            <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span> layers
+            <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span>
           </butotn>
             <div class="add-tool">
                 <div class="export_div">
@@ -320,7 +325,7 @@
                 </div>
             </div>
             <div id="layerPanel">
-                <h3 id="layersId">Layers <button onclick="addLayer()">+</button></h3>
+                <h3 id="layersId">Layers <button onclick="addLayer()" id="layersId_1">+</button></h3>
                 <div id="layerList">
                     <div class="div-preview"></div>
                 </div>
@@ -332,18 +337,22 @@
             <b>ImgEditor</b>
           </section>
           <div class="set_bar">
-            <div class="setting-item">
-              <button title="Hide / Show">
+            <div class="setting-item" id="Hide_element_div">
+              <button title="Hide / Show" >
                 <span class="material-symbols-outlined">visibility_off</span>
               </button>
-              <div class="setting-panel">Hide element</div>
+              <div class="setting-panel" id="Hide_element_div1">Hide element</div>
             </div>
           
-            <div class="setting-item">
+            <div class="setting-item" id="Opacity_control_div">
               <button title="Opacity">
                 <span class="material-symbols-outlined">opacity</span>
               </button>
-              <div class="setting-panel">Opacity control</div>
+              <div class="setting-panel" id="Opacity_control_div1">
+                <label for="Opacity control"> Opacity control <br>
+                  <input type="range" name="Opacity_control" id="Opacity_control" value="1" min="0" max="1" step="0.001">
+                </label>
+              </div>
             </div>
           
             <div class="setting-item">
@@ -393,7 +402,7 @@
                 <span class="material-symbols-outlined">upload_file</span>
               </button>
               <div class="setting-panel">
-                <input type="file" title="choose a image" id="imageInput" onchange="pressed()" accept="image/*">
+                 <input type="file" title="choose a image" id="imageInput" accept="image/*"><!-- onchange="pressed()" -->
               </div>
             </div>
             <button>
@@ -424,9 +433,10 @@
         <div class="filter-control"><label>Invert</label><input type="range" id="invertRange" min="0" max="100" step="1" value="0"></div>
         <div class="filter-control"><label>Saturate</label><input type="range" id="saturateRange" min="0" max="500" step="1" value="100"></div>
         <div class="filter-control"><label>Sepia</label><input type="range" id="sepiaRange" min="0" max="100" step="1" value="0"></div>
-        <div class="respnseImg">
+        <div class="filter-control"><label>Remove Background</label> <p id="bgremover_status">Waiting...</p><input type="checkbox" id="Remove_Background" ></div>
+        <div class="respnseImg" id="respnseImg">
           <button id="applyImage">Apply</button>
-        <button onclick="closeAlert()" id="cancelImge">Cancel</button>
+          <button onclick="closeAlert()" id="cancelImge">Cancel</button>
         </div>
       </div>
     </div>
@@ -488,33 +498,14 @@ For questions or permissions beyond these terms, contact the author directly. <b
                 <label>Eraser Opacity: <br> 
                   <input type="range" id="eraserIntensity" min="1" max="100" value="100">
                 </label> <br>
-                <label class="switch"> activate_placement <br>
-                  <input type="checkbox"  id="yourCheckboxId">
-                  <span class="slider"></span>
-                  <div class="hover-info">Enable transformation tool</div>
-                </label> <br>
                 <label for="colorPicker"> Colour:
-                  <input type="color" id="colorPicker" value="#000000">
+                  <input type="color" class="jscolor" id="colorPicker" value="#33AAFF" >
+                  <!-- <input type="color" class="jscolor" id="colorPicker" value="#33AAFF" onchange="box.style.backgroundColor = '#' + this.jscolor"> -->
                 </label>
               </div>
             </div>
           </div>
-        </div>
-        <div class="eng_trans">
-          <button>
-            <i class="material-icons"><b>zoom_out_map</b></i>
-          </button>
-          <div class="transformation" id="transformation">
-            <label>
-              Zoom (80%-115%) <br>
-              <input type="range" id="zoomRange" min="0.3" max="1.50" step="0.01" value="1">
-            </label> <br>
-            <label>
-              Rotate(-180°-180°) <br>
-              <input type="range" id="rotateRange" min="-180" max="180" step="1" value="0">
-            </label>
-            <button id="resetBtn">Reset</button>
-          </div>
+    
         </div>
         <div class="transformationshapes" id="transformationshapes">
           <button class="shapes">
@@ -670,13 +661,14 @@ For questions or permissions beyond these terms, contact the author directly. <b
           </div>
           
         </div>
-        <butotn class="latyer_at_phone">
+        <!-- <butotn class="latyer_at_phone">
           <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span>
-        </butotn>
+        </butotn> -->
     </div>
   </div>
   <script src="./transformation.js"></script>
-  <script>
+  <script src="./bgrevomer.js"></script>
+  <!-- <script>
     window.pressed = function(){
     var a = document.getElementById('imageInput');
         if(a.value == "")
@@ -689,7 +681,7 @@ For questions or permissions beyond these terms, contact the author directly. <b
             name_file.innerHTML = theSplit[theSplit.length-1];
         }
     };
-  </script>
+  </script> -->
   <script>
     const toggleButton = document.getElementById('chatbot-button');
     const chatbot = document.getElementById('chatbot-container');
@@ -705,46 +697,6 @@ For questions or permissions beyond these terms, contact the author directly. <b
       const number = document.getElementById('numberInput');
       number.value = val;
     }
-  </script>
-  <script>
-    const circle = document.getElementById("circle13");
-    const dot = document.getElementById("dot12");
-    const angleDisplay = document.getElementById("angleshower");
-    const wrapper = document.getElementById(".circle13");
-  
-    let isDragging = false;
-  
-    const radius = 80; // circle radius (half of 160px)
-    const center = { x: 100, y: 100 }; // center of wrapper
-  
-    wrapper.addEventListener("mousedown", (e) => {
-      if (e.target === dot) {
-        isDragging = true;
-      }
-    });
-  
-    window.addEventListener("mouseup", () => (isDragging = false));
-  
-    window.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-  
-      const rect = wrapper.getBoundingClientRect();
-      const cx = rect.left + center.x;
-      const cy = rect.top + center.y;
-  
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-  
-      // Calculate rotation angle
-      let angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      angle += 90; // rotate top to start
-  
-      // Apply rotation
-      circle.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-  
-      // Update angle display
-      angleDisplay.textContent = `Angle: ${Math.round(angle)}°`;
-    });
   </script>
   <script>
     const Upload_File = document.getElementById("Upload_File");
