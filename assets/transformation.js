@@ -6,9 +6,9 @@ checkbox1.addEventListener('change', function() {
 });
 isChecked = checkbox1.checked;
 const customCursor = document.getElementById("customCursor");
-const zoomInput = document.getElementById('zoomRange');
+const zoomInput = document.getElementById("ZoomRange1");
 const rotateInput = document.getElementById('rotateRange');
-const resetBtn = document.getElementById('resetBtn');
+const resetBtn = document.getElementById('resettrans');
 const drawingArea = document.getElementById('drawingArea');
 const wrapper = document.getElementById('container');
 const container = document.getElementById('contain_dra-area');
@@ -144,39 +144,6 @@ function createsettingtool(){
         <div class="cansetTool">
         </div>
         `;
-    //     <div class="cansetTool">
-    //     // <table>
-    //     //     <tr>
-    //     //         <td>
-    //     //             <button class="Duplicate_layer">Duplicate</button>
-    //     //         </td>
-    //     //     <td>
-    //     //         <button class="hide_layer">
-    //     //             hide
-    //     //         </button>
-    //     //     </td>
-    //     //     </tr>
-    //     //     <tr>
-    //     //         <td>
-    //     //             <button class="reset_layer">Reset</button>
-    //     //         </td>
-    //     //         <td>
-    //     //             <button class="bg_layer">bg</button>
-    //     //         </td>
-    //     //     </tr>
-    //     //     <tr>
-    //     //         <td>
-    //     //             <input type="color" class="layer_color_picker" value="transparent">
-    //     //         </td>
-    //     //         <td>
-    //     //             <div class="input_group">
-    //     //                 <label for="numberInput">Opacity:</label><br>
-    //     //                 <input type="number" class="numberInput" min="1" max="100" value="100" oninput="syncInputs(this.value)">
-    //     //             </div>
-    //     //         </td>
-    //     //     </tr>
-    //     // </table>
-    // </div>
         const wrapper = document.createElement('div');
         wrapper.innerHTML = toolPanelHTML.trim();
         return wrapper.firstElementChild;
@@ -428,57 +395,7 @@ function redo() {
     restoreState(state);
 }
 
-// imageInput.addEventListener("change", function () {
-//     if (!activeLayer) return;
-//     const file = this.files[0];
-//     if (file) {
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//         const img = new Image();
-//         img.onload = function () {
-//         const ctx = activeLayer.getContext("2d");
-//         ctx.drawImage(img, 0, 0, activeLayer.width, activeLayer.height);
-//         saveState();
-//         };
-//         img.src = e.target.result;
-//     };
-//     reader.readAsDataURL(file);
-//     }
-// });
 
-
-//   function updateCursorPosition(e) {
-//     const rect = drawingArea.getBoundingClientRect();
-//     const x = e.clientX - rect.left;
-//     const y = e.clientY - rect.top;
-    
-//     customCursor.style.left = `${x}px`;
-//     customCursor.style.top = `${y}px`;
-//   }
-// function updateCursorPosition(e) {
-//     const rect = drawingArea.getBoundingClientRect();
-//     const style = window.getComputedStyle(drawingArea);
-//     const matrix = new DOMMatrix(style.transform);
-    
-//     // Get mouse position relative to element
-//     const x = e.clientX - rect.left;
-//     const y = e.clientY - rect.top;
-    
-//     // If element is transformed, adjust coordinates
-//     if (matrix.isIdentity) {
-//       // No transformation - use simple positioning
-//       customCursor.style.left = `${x}px`;
-//       customCursor.style.top = `${y}px`;
-//     } else {
-//       // Apply inverse transformation to get correct position
-//       const inverseMatrix = matrix.inverse();
-//       const transformedX = x * inverseMatrix.a + y * inverseMatrix.c + inverseMatrix.e;
-//       const transformedY = x * inverseMatrix.b + y * inverseMatrix.d + inverseMatrix.f;
-      
-//       customCursor.style.left = `${transformedX}px`;
-//       customCursor.style.top = `${transformedY}px`;
-//     }
-//   }
 
 function updateDrawingAreaCursor() {
     let thicknessSlider = document.getElementById('thicknessSlider');
@@ -588,40 +505,45 @@ function updateDrawingAreaCursor() {
         ctxPreview.drawImage(tempCanvas, -drawWidth / 2, -drawHeight / 2, drawWidth, drawHeight);
         ctxPreview.restore();
     }
-    // imageInput.addEventListener("change", function () {
-//     if (!activeLayer) return;
-//     const file = this.files[0];
-//     if (file) {
-//     const reader = new FileReader();
-//     reader.onload = function (e) {
-//         const img = new Image();
-//         img.onload = function () {
-//         const ctx = activeLayer.getContext("2d");
-//         ctx.drawImage(img, 0, 0, activeLayer.width, activeLayer.height);
-//         saveState();
-//         };
-//         img.src = e.target.result;
-//     };
-//     reader.readAsDataURL(file);
-//     }
-// });
-    imageInput.addEventListener("change", function () {
-      if (!activeLayer) return;
-      const file = this.files[0];
-      if (file) {
+
+    function loadImage(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
           image.onload = function () {
             imgX = 0;
             imgY = 0;
-            drawPreview();
-            openAlert();
+      
+            // Conditional draw
+            if (bg_status && nobagdata && checkbox4) {
+              // Use background removed image
+              image.src = nobagdata;
+            } else {
+              // Use normal image
+              drawPreview();
+            }
+            image.onload = () => drawPreview();
+            openAlert(); // optional
           };
-          image.src = e.target.result;
+          image.src = e.target.result; // Normal image
         };
         reader.readAsDataURL(file);
       }
-    });
+    function clearDrawing() {
+        if (!activeLayer) return; // Ensure canvas and context exist
+        ctxPreview.clearRect(0, 0, canvas.width, canvas.height); // Clear entire canvas
+        imgX = 0;
+        imgY = 0;
+    }
+      
+      // Event listener example
+      let file6;
+      imageInput.addEventListener("change", function () {
+        if (!activeLayer) return;
+        file6 = this.files[0];
+        let file = this.files[0];
+        if (file) loadImage(file);
+      });
+    
 
     Object.values(controls).forEach(ctrl => ctrl.addEventListener("input", drawPreview));
 
@@ -744,7 +666,130 @@ async function downloadORA() {
     console.log("Download triggered.");
   }
   
+  
 // =================================================================================================================================
+// =================================================================================================================================
+
+
+    let selfieSegmentation = null;
+    let modelsReady = false;
+    let queuedFile = null;
+    let bg_status = false;
+    let nobagdata;  
+    let checkbox4 = false;
+
+    let status1 = document.getElementById('bgremover_status');
+
+
+    status1.innerText = 'Loading model...';
+
+    async function loadModel() {
+      try {
+        selfieSegmentation = new SelfieSegmentation({
+          locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`
+        });
+        selfieSegmentation.setOptions({ modelSelection: 1 });
+        await selfieSegmentation.initialize();
+
+        modelsReady = true;
+        status1.innerText = '✅ Model ready';
+        // processBtn.disabled = false;
+
+        if (queuedFile) {
+          await processFile(queuedFile);
+          queuedFile = null;
+        }
+      } catch (err) {
+        status1.innerText = '⚠️ Error loading model';
+        console.error(err);
+      }
+    }
+    loadModel();
+
+    function handleFileChange() {
+        const input88 = document.getElementById('imageInput');
+        let file1 = input88.files[0];
+        if (!file1) {
+            return;
+          }
+        queuedFile = file1;
+        status1.innerText = 'Image queued for processing';
+      }
+      
+    const checkbox2 = document.getElementById('Remove_Background');
+    checkbox2.addEventListener("change", async () => {
+          if (checkbox2.checked) {
+            status1.innerText = '✅ Checkbox is checked!';
+            handleFileChange();
+            checkbox4 = true;
+            if(!modelsReady){
+                status1.innerText = '⚠️ Models not available';
+                status1.style.color = 'crimson';
+                return;
+            }else{
+                nobagdata =  await processFile(queuedFile);
+                bg_status = true;
+                clearDrawing();
+            }
+          } else if(!checkbox2.checked) {
+            bg_status = false;
+            clearDrawing();
+            status1.innerText = '✅ Background returned';
+          }else{return}
+          loadImage(file6);
+        });
+
+    async function fileToImage(file) {
+      return new Promise((resolve, reject) => {
+        const img77 = new Image();
+        img77.onload = () => resolve(img77);
+        img77.onerror = reject; 
+        img77.src = URL.createObjectURL(file);
+      });
+    }
+
+    async function processFile(file) {
+        status1.innerText = 'Processing image...';
+      const img77 = await fileToImage(file);
+
+      return new Promise((resolve) => {
+        selfieSegmentation.onResults((results) => {
+          if (!results.segmentationMask) {
+            status1.innerText = '⚠️ Segmentation failed';
+            resolve(null);
+            return;
+          }
+
+          const base64 = maskToBase64(results.segmentationMask, img77);
+
+          status1.innerText = '✅ Background removed';
+          resolve(base64);
+        });
+        selfieSegmentation.send({ image: img77 });
+      });
+    }
+
+    function maskToBase64(mask, img) {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+
+      // Draw original image
+      ctx.drawImage(img, 0, 0);
+
+      // Apply mask
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.drawImage(mask, 0, 0, img.width, img.height);
+
+      return canvas.toDataURL('image/png'); // Base64 PNG
+    }
+
+// =================================================================================================================================
+// =================================================================================================================================
+// =================================================================================================================================
+
+
 thicknessSlider.addEventListener('input', updateDrawingAreaCursor);
 drawingArea.addEventListener("mousemove", updateDrawingAreaCursor);
 // Initialize with one layer
@@ -752,4 +797,4 @@ addLayer();
 document.getElementById("drawingArea").addEventListener('mousemove', () => {
     updateLayerPanel();
 });
-// updateCursor();
+
