@@ -278,10 +278,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.5.2/jscolor.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation" ></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0" ></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/deeplab" ></script> -->
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr"></script>
 
   <link rel="stylesheet" href="./main.css">
 </head>
@@ -334,9 +333,12 @@
         <div class="layers_set" id="layers_set">
           <section class="Title_herer" onclick="window.location.href='../index.html'">
             <img src="../images/cryptochat.png"  width="30px" height="35px" alt="">
-            <b>ImgEditor</b>
+            <b>Aivify</b>
           </section>
           <div class="set_bar">
+            <button id="Hide_layer_editor">
+              <span class="material-symbols-outlined" ><b>cancel</b></span>
+            </button>
             <div class="setting-item" id="Hide_element_div">
               <button title="Hide / Show" >
                 <span class="material-symbols-outlined">visibility_off</span>
@@ -402,12 +404,9 @@
                 <span class="material-symbols-outlined">upload_file</span>
               </button>
               <div class="setting-panel">
-                 <input type="file" title="choose a image" id="imageInput" accept="image/*"><!-- onchange="pressed()" -->
+                 <input type="file" title="choose a image" id="imageInput" accept="image/*">
               </div>
             </div>
-            <button>
-              <span class="material-symbols-outlined" ><b>cancel</b></span>
-            </button>
           </div>
         </div>
     </div> 
@@ -444,27 +443,26 @@
   <button id="chatbot-button">
     <span class="material-symbols-outlined" title="License">workspace_premium</span>
   </button>
-
   <div id="chatbot-container">
     <div id="chatbot-header">Our License</div>
     <div id="chatbot-body">
       <p><em>
         Copyright (c) 2025 Zaxly <br> <br>
 
-All rights reserved. <br> <br>
+        All rights reserved. <br> <br>
 
-This website and its source code are the intellectual property of Zaxly.
-You may use this site to upload, create, modify, and export images for personal
-or commercial use. <br>
-<br>
-However, you are NOT permitted to: <br>
-- Copy or clone the website or its code <br>
-- Redistribute the website, in part or in full <br>
-- Host or reproduce this platform on another domain or service <br> <br>
+        This website and its source code are the intellectual property of Zaxly.
+        You may use this site to upload, create, modify, and export images for personal
+        or commercial use. <br>
+        <br>
+        However, you are NOT permitted to: <br>
+        - Copy or clone the website or its code <br>
+        - Redistribute the website, in part or in full <br>
+        - Host or reproduce this platform on another domain or service <br> <br>
 
-By using this website, you agree to these terms. <br>
+        By using this website, you agree to these terms. <br>
 
-For questions or permissions beyond these terms, contact the author directly. <br> email: zaxly.example@gamil.com      </em></p>
+        For questions or permissions beyond these terms, contact the author directly. <br> email: zaxly.example@gamil.com      </em></p>
     </div>
   </div>
   <div class="dicsecs_All">
@@ -480,7 +478,8 @@ For questions or permissions beyond these terms, contact the author directly. <b
         <div class="editortool" id="editortool">
           <div class="editortool1" id="editortool1">
             <button class="editorchoice">
-              <span class="material-symbols-outlined" title="Brush Tool"> <b>brush</b></span>
+              <span class="material-symbols-outlined" title="Brush Tool" id="Brush_Tools"> <b>brush</b></span>
+              <b id="Brushes_tls">Brushes</b>
             </button>
             <div class="floatereditor">
               <div class="focuseditor">
@@ -492,15 +491,16 @@ For questions or permissions beyond these terms, contact the author directly. <b
                 </button>
               </div>
               <div class="more_focuseditor" id="more_focuseditor">
+                <!-- <div id="colorPickr"></div> -->
                 <label>Size: <br>
-                  <input type="range" id="thicknessSlider" min="0.1" max="250" value="3"> <br>
+                  <input type="range" id="thicknessSlider" min="0.1" max="250" value="3"> 
+                  <br>
                 </label>
                 <label>Eraser Opacity: <br> 
                   <input type="range" id="eraserIntensity" min="1" max="100" value="100">
                 </label> <br>
-                <label for="colorPicker"> Colour:
-                  <input type="color" class="jscolor" id="colorPicker" value="#33AAFF" >
-                  <!-- <input type="color" class="jscolor" id="colorPicker" value="#33AAFF" onchange="box.style.backgroundColor = '#' + this.jscolor"> -->
+                <label for="colorPicker">  <b>Colour:</b>
+                  <div id="colorPickr"></div>
                 </label>
               </div>
             </div>
@@ -509,7 +509,8 @@ For questions or permissions beyond these terms, contact the author directly. <b
         </div>
         <div class="transformationshapes" id="transformationshapes">
           <button class="shapes">
-            <i class="material-symbols-outlined"><b>pentagon</b></i>
+            <span class="material-symbols-outlined" id="shapes_1190"><b>pentagon</b></span>
+            <b id="shapes_11">Shapes</b>
           </button>
           <div class="trans_materisl">
             <div class="buttons-wrapper">
@@ -548,9 +549,10 @@ For questions or permissions beyond these terms, contact the author directly. <b
             </div>
           </div>
         </div>
-        <div class="rulerstyle">
+        <div class="rulerstyle" id="rulerstyle">
           <button class="ruler1_1">
-            <span class="material-symbols-outlined" title="Show Rulers"><b>straighten</b></span>
+            <span class="material-symbols-outlined" title="Show Rulers" id="Show_Rulers_9"><b>straighten</b></span>
+            <b id="rulers_7">rulers</b>
           </button>
           <div class="ruler-toolbar">
             <span class="material-symbols-outlined" title="Show Rulers">straighten</span>
@@ -564,8 +566,9 @@ For questions or permissions beyond these terms, contact the author directly. <b
           </div>
         </div>
         <div class="colorAutopicker" id="colorAutopicker">
-          <button>
-            <span class="material-symbols-outlined" title="Pick a Color"><b>palette</b></span>
+          <button id="texture_type">
+            <span class="material-symbols-outlined" title="Pick a Color" id="Pick_a_Color"><b>palette</b></span>
+            <b id="tex_icon">Texture</b>
           </button>
           <div class="color-picker-toolbar">
             <!-- Pure Color -->
@@ -617,9 +620,10 @@ For questions or permissions beyond these terms, contact the author directly. <b
             </button>
           </div>
         </div>
-        <div class="backfilter">
-          <button class="backfilterbtn">
-            <span class="material-symbols-outlined" title="Backdrop Filters"><b>blur_on</b></span>
+        <div class="backfilter" id="backfilter">
+          <button class="backfilterbtn" id="backfilterbtn">
+            <span class="material-symbols-outlined" title="Backdrop Filters" id="Backdrop_Filters"><b>blur_on</b></span>
+            <b id="Backdrop_Filters1">Filters</b>
           </button>
           <div class="backdrop-filters-toolbar">
             <button title="Blur">
@@ -661,27 +665,17 @@ For questions or permissions beyond these terms, contact the author directly. <b
           </div>
           
         </div>
-        <!-- <butotn class="latyer_at_phone">
-          <span class="material-symbols-outlined" title="Merge Layers"><b>layers</b></span>
-        </butotn> -->
     </div>
+  </div>
+
+  <div id="message_alert">
+    <span class="material-symbols-outlined" id="message_alert_id">people</span>
+     <p id="message_alert_txt">Hi user, Welcome!</p>
+    <button id="message_alert_btn1">ok</button> 
+    <button id="message_alert_btn2">cancel</button>
   </div>
   <script src="./transformation.js"></script>
   <script src="./bgrevomer.js"></script>
-  <!-- <script>
-    window.pressed = function(){
-    var a = document.getElementById('imageInput');
-        if(a.value == "")
-        {
-            name_file.innerHTML = "Choose file";
-        }
-        else
-        {
-            var theSplit = a.value.split('\\');
-            name_file.innerHTML = theSplit[theSplit.length-1];
-        }
-    };
-  </script> -->
   <script>
     const toggleButton = document.getElementById('chatbot-button');
     const chatbot = document.getElementById('chatbot-container');
@@ -705,5 +699,6 @@ For questions or permissions beyond these terms, contact the author directly. <b
       imageInput44.click();
     });
   </script>
+    
 </body>
 </html>
