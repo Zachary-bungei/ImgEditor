@@ -547,9 +547,6 @@ body {
     font-size: 16px;
     cursor: pointer;
   }
-
-  
-
   
   /* Expanded state - desktop */
   @media (hover: hover) {
@@ -619,8 +616,7 @@ body {
   }
   /*............................................................................................................................................ */
   
-  
-  /* setting image */
+
   
   #imageUploadOverlay {
     position: fixed;
@@ -968,13 +964,6 @@ body {
   #ZomRot label input{
     width: 120px;
   }
-  /* .latyer_at_phone{
-    border: 2px solid rgb(32, 32, 165);
-    border-radius: 80px;
-    width: 33px;height: 33px;
-    color: rgb(60, 60, 200);
-    cursor: pointer;
-  } */
   #Angle98{
     background-color: transparent;
     width: 35px;
@@ -1190,13 +1179,296 @@ Title_herer > img{
   filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.1));
 }
 .setting-item{
-  background-color: #016612;
+  background-color: #10ec3500;
   margin-top: 3px;
   height: 7vh;
   min-height: 40px;
   max-height: 70px;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 40px;
+}
+#color_bt{
+  position: absolute;
+  bottom: 90px!important;
+  right: 90px!important;
+  height: 40px;
+  display: flex;
+  width: 40px;
+  background-color: red;
+}
+#colorPickr {
+  position: absolute;
+  bottom: 90px;
+  right: 30%;
+  z-index: 9999; /* keeps it above other elements */
+  
+  /* Appearance */
+  background: rgba(159, 3, 3, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  transition: all 0.25s ease-in-out;
 }
 
+/* Optional hover effect for nice UX */
+#colorPickr:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+#colorPicker{
+  display: flex;
+}
+#Hide_layer_editor{
+  position: absolute;
+  margin-top: -56px;
+  color: rgb(255, 255, 255);
+  margin-left: 37px;
+  box-shadow: 0px 0px 5px 2px rgb(42, 8, 135);
+  background-color: #3d354fc5;
+  backdrop-filter: blur(1px);
+  height: 24px;
+  width: 24px;
+  padding: 0px;
+}
+#message_alert{
+  position: absolute;
+  display: none;
+  padding: 4px 20px 4px 20px;
+  place-content: center;
+  place-self: center;
+  top: 20px;
+  background-color: rgba(100, 151, 24, 0.626);
+  backdrop-filter: blur(20px);
+  border-radius: 40px;
+  font-size: 16px;
+  height: 30px;
+  border: 2px solid green;
+}
+#message_alert_id{
+  font-size: 25px;
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0);
+  padding-top: 2px;
+}
+#message_alert_txt{
+  font-size: 16px;
+  font-weight: light;
+  background-color: rgba(255, 0, 0, 0);
+  padding-left: -20px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 10px;
+  color: rgb(255, 255, 255);
+}
+#message_alert > button{
+  border: none;
+  border-radius: 40px;
+  height: 27px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 1px;
+  width: 90px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  justify-content: center;
+  font-weight: 200;
+  display: flex;
+  padding-top: 5px;
+}
+#editortool1{
+  background-color: #01661200;
+  padding: 0px;
+  height: 49px;
+  cursor: pointer;
+}
+#editortool1 button{
+  display: flex;
+  flex-direction: column;
+  background-color: #01661200;
+  margin: 0px;
+  border: none
+}
+#Brush_Tools{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-color: rgba(192, 255, 251, 0);
+  padding-top: 0px;
+  transform: translateY(5px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.6s ease;
+}
+#Brushes_tls{
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(25px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.1s ease;
+  margin-top: -10px;
+}
+#editortool1:hover  #Brush_Tools{ 
+  padding-top: 3px;
+  opacity: 1;
+  transition-delay: 0.1s;
+  transform: translateY(0);
+  transform: scale(0.7);
+}
+
+#editortool1:hover  #Brushes_tls{ 
+  opacity: 1;
+  transition-delay: 0.01s;
+  transform: translateY(0);
+}
+
+/* {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} */
+.shapes{
+  display: flex;
+  flex-direction: column;
+  background-color: #01661200;
+  margin: 0px;
+  border: none
+}
+#shapes_1190{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-color: rgba(192, 255, 251, 0);
+  padding-top: 0px;
+  transform: translateY(5px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.6s ease;
+}
+#shapes_11{
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(25px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.1s ease;
+  margin-top: -10px;
+}
+#transformationshapes:hover  #shapes_1190{ 
+  padding-top: 3px;
+  opacity: 1;
+  transition-delay: 0.1s;
+  transform: translateY(0);
+  transform: scale(0.7);
+}
+
+#transformationshapes:hover  #shapes_11{ 
+  opacity: 1;
+  transition-delay: 0.01s;
+  transform: translateY(0);
+}
+
+/* """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" */
+.ruler1_1{
+  display: flex;
+  flex-direction: column;
+  background-color: #01661200;
+  margin: 0px;
+  border: none
+}
+#Show_Rulers_9{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-color: rgba(192, 255, 251, 0);
+  padding-top: 0px;
+  transform: translateY(5px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.6s ease;
+}
+#rulers_7{
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(25px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.1s ease;
+  margin-top: -10px;
+}
+#rulerstyle :hover  #Show_Rulers_9{ 
+  padding-top: 3px;
+  opacity: 1;
+  transition-delay: 0.1s;
+  transform: translateY(0);
+  transform: scale(0.7);
+}
+
+#rulerstyle :hover  #rulers_7{ 
+  opacity: 1;
+  transition-delay: 0.01s;
+  transform: translateY(0);
+}
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+#texture_type{
+  display: flex;
+  flex-direction: column;
+  background-color: #01661200;
+  margin: 0px;
+  border: none
+}
+#Pick_a_Color{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-color: rgba(192, 255, 251, 0);
+  padding-top: 0px;
+  transform: translateY(5px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.6s ease;
+}
+#tex_icon{
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(25px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.1s ease;
+  margin-top: -10px;
+}
+#colorAutopicker:hover  #Pick_a_Color{ 
+  padding-top: 3px;
+  opacity: 1;
+  transition-delay: 0.1s;
+  transform: translateY(0);
+  transform: scale(0.7);
+}
+
+#colorAutopicker:hover  #tex_icon{ 
+  opacity: 1;
+  transition-delay: 0.01s;
+  transform: translateY(0);
+}
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: */
+#backfilterbtn{
+  display: flex;
+  flex-direction: column;
+  background-color: #01661200;
+  margin: 0px;
+  border: none
+}
+#Backdrop_Filters{
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  background-color: rgba(192, 255, 251, 0);
+  padding-top: 0px;
+  transform: translateY(5px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.6s ease;
+}
+#Backdrop_Filters1{
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(25px); /* Start lower */
+  transition: transform 0.5s ease, opacity 0.1s ease;
+  margin-top: -10px;
+}
+#backfilter:hover  #Backdrop_Filters{ 
+  padding-top: 3px;
+  opacity: 1;
+  transition-delay: 0.1s;
+  transform: translateY(0);
+  transform: scale(0.7);
+}
+
+#backfilter:hover  #Backdrop_Filters1{ 
+  opacity: 1;
+  transition-delay: 0.01s;
+  transform: translateY(0);
+}
 
   /* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1279,4 +1551,4 @@ Title_herer > img{
     }
 
   }
-  
+ 
