@@ -4,7 +4,22 @@ checkbox1.addEventListener('change', function() {
     isChecked = this.checked;
     return;
 });
-isChecked = checkbox1.checked;
+const pickr = Pickr.create({
+  el: '#colorPickr',
+  theme: 'monolith', 
+  default: 'rgba(0, 200, 255, 0.7)',
+  components: {
+    preview: true,
+    opacity: true,
+    hue: true,
+    interaction: { input: true, rgba: true, save: false }
+  }
+});
+
+pickr.on('change', (color) => {
+  colorPicker = (color.toRGBA().toString()); // e.g. rgba(100,50,200,0.8)
+});
+
 const customCursor = document.getElementById("customCursor");
 const zoomInput = document.getElementById("ZoomRange1");
 const rotateInput = document.getElementById('rotateRange');
@@ -109,8 +124,8 @@ updateTransform();
 
 // const drawingArea = document.getElementById("drawingArea");
 const layerList = document.getElementById("layerList");
-const colorPicker = document.getElementById("colorPicker");
-let selectedColor = colorPicker.value;
+let colorPicker;
+let selectedColor = colorPicker;
 const thicknessSlider = document.getElementById("thicknessSlider");
 const eraserIntensity = document.getElementById("eraserIntensity");
 const imageInput = document.getElementById("imageInput");
@@ -120,7 +135,7 @@ const ruler = document.getElementById("movableRuler");
 let layers = [];
 let layersetting = [];
 let activeLayer = null;
-let activeTool = "pen"; // line, tringle, eraser
+let activeTool = "pen"; // pen or eraser
 let drawing = false;
 let history = [];
 let redoStack = [];
@@ -231,11 +246,6 @@ function removeLayer() {
 
 document.getElementById("penTool").onclick = () => activeTool = "pen";
 document.getElementById("eraserTool").onclick = () => activeTool = "eraser";
-// document.getElementById("lineTool").onclick = () => activeTool = "lineTool";
-// document.getElementById("rulerTool").onclick = () => {
-//     activeTool = "ruler";
-//     ruler.style.display = "block";
-// };
 
 drawingArea.addEventListener("mousedown", (e) => {
     drawing = true;
@@ -255,88 +265,75 @@ drawingArea.addEventListener("mousedown", (e) => {
             // savedImageData = ctx.getImageData(0, 0, activeLayer.width, activeLayer.height);
     }
 });
-
+let x;
+let y;
 drawingArea.addEventListener("mousemove", (e) => {
     if (!drawing || !activeLayer) return;
     if(isChecked) return;
-    const ctx = activeLayer.getContext("2d");
-    const x = e.offsetX;
-    const y = e.offsetY;
+    let ctx = activeLayer.getContext("2d");
+    let x = e.offsetX;
+    let y = e.offsetY;
+
     if (activeTool == "lineTool") {
         // const rect = activeLayer.getBoundingClientRect();
         // currentPoint.x = e.clientX - rect.left;
         // currentPoint.y = e.clientY - rect.top;
         // // ctx.putImageData(savedImageData, 0, 0);
         // drawLine(startPoint, currentPoint, "pink");
-    } {
-        ctx.lineTo(x, y);
-        ctx.globalCompositeOperation = "destination-out"; 
-        ctx.strokeStyle = "rgba(255, 255, 255, " + (eraserIntensity.value / 100) + ")"; 
-        ctx.lineTo(x, y); ctx.globalCompositeOperation = activeTool === "eraser" ? "destination-out" : "source-over"; ctx.strokeStyle = activeTool === "eraser" ? "rgba(255,255,255," + (eraserIntensity.value / 100) + ")" : colorPicker.value; ctx.lineWidth = thicknessSlider.value; ctx.lineCap = "round"; ctx.stroke();
-        ctx.strokeStyle = activeTool === "eraser" ? "rgba(255,255,255," + (eraserIntensity.value / 100) + ")" : colorPicker.value;
-        ctx.lineWidth = thicknessSlider.value;
-        ctx.lineCap = "round";
-        ctx.stroke();
-    function drawWithPen(ctx) {
-        // let points = [];
-        ctx.strokeStyle = colorPicker.value;
-        ctx.lineWidth = parseInt(thicknessSlider.value);
-        ctx.lineJoin = "round";
-        ctx.lineCap = "round";
-        if (points.length < 3) {
-        ctx.lineTo(points[0].x, points[0].y);
-        ctx.stroke();
-        return;
-        }
+        }else {
+            ctx.lineTo(x, y);
+            ctx.globalCompositeOperation = activeTool === "eraser" ? "destination-out" : "source-over";
+            ctx.strokeStyle = activeTool === "eraser"
+            ? "rgba(255,255,255," + (eraserIntensity.value / 100) + ")"
+            : colorPicker;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+            if(activeTool === "pen"){
+                ctx.strokeStyle = colorPicker;
+                ctx.lineWidth = parseInt(thicknessSlider.value);
+                if (points.length < 3) {
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    return;
+                }
+                    ctx.beginPath();
+                    ctx.moveTo(points[0].x, points[0].y);
+                    
+                    for (let i = 1; i < points.length - 2; i++) {
+                    const xc = (points[i].x + points[i + 1].x) / 2;
+                    const yc = (points[i].y + points[i + 1].y) / 2;
+                    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+                    }
+                    
+                    ctx.stroke();
+                }
+            else {
+                let intensity = parseInt(eraserIntensity.value) / 100;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.lineWidth = parseInt(thicknessSlider.value);
+                ctx.globalAlpha = intensity;
+                
+                if (points.length < 3) {
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    return;
+                }
             
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            
-            for (let i = 1; i < points.length - 2; i++) {
-            const xc = (points[i].x + points[i + 1].x) / 2;
-            const yc = (points[i].y + points[i + 1].y) / 2;
-            ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-            }
-            
-            ctx.stroke();
-        }
-        function erase(ctx) {
-        const intensity = parseInt(eraserIntensity.value) / 100;
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.lineWidth = parseInt(thicknessSlider.value);
-        ctx.lineJoin = "round";
-        ctx.lineCap = "round";
-        ctx.globalAlpha = intensity;
-        
-        if (points.length < 3) {
-            ctx.lineTo(points[0].x, points[0].y);
-            ctx.stroke();
-            return;
-        }
-        
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, points[0].y);
-        
-        for (let i = 1; i < points.length - 2; i++) {
-            const xc = (points[i].x + points[i + 1].x) / 2;
-            const yc = (points[i].y + points[i + 1].y) / 2;
-            ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-        }
-        
-        ctx.stroke();
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = 1.0;
-        }  
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                
+                for (let i = 1; i < points.length - 2; i++) {
+                    const xc = (points[i].x + points[i + 1].x) / 2;
+                    const yc = (points[i].y + points[i + 1].y) / 2;
+                    ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+                }
+                
+                ctx.globalAlpha = 1.0;
+                ctx.stroke();
+            }  
 
-        if(activeTool === "pen"){
-            drawWithPen(ctx)
-        }
-        else{
-            erase(ctx)
-        }
-   }
-});
-
+         }
+    });
 drawingArea.addEventListener("mouseup", (e) => {
     if(activeTool === "lineTool" && activeline){
         const rect = drawingArea.getBoundingClientRect();
@@ -398,8 +395,10 @@ function redo() {
 
 
 function updateDrawingAreaCursor() {
-    let thicknessSlider = document.getElementById('thicknessSlider');
-    let size = parseInt(thicknessSlider.value);
+    let thicknessSlider = document.getElementById('thicknessSlider').value;
+    let Zoomsize = document.getElementById('ZoomRange1').value;
+    let persevalue = thicknessSlider * Zoomsize;
+    let size = parseInt(persevalue);
     const radius = Math.max(1, size / 2 - 2);
     const hotspot = size / 2;
     
@@ -413,7 +412,7 @@ function updateDrawingAreaCursor() {
                     r="${radius}" 
                     fill="none" 
                     stroke="red" 
-                    stroke-width="2"/>
+                    stroke-width="0.8"/>
         </svg>
     `;
     
@@ -591,8 +590,14 @@ function updateDrawingAreaCursor() {
 //save as png
 function saveImage() {
     if (layers.length <= 0) {
-        alert("no layer");
-        return;
+       divEffectsConfig.txt_message.text = "No layer found!";
+       divEffectsConfig.mainmsg.backgroundColor = "rgba(157, 81, 97, 0.7)";
+       divEffectsConfig.icons_alert.text ="warning";
+       divEffectsConfig.mainmsg.borderColor = "red";
+       divEffectsConfig.mainmsg.dispay = "flex";
+
+       applyMessageData(divEffectsConfig);
+       return;
     }
     const exportCanvas = document.createElement("canvas");
     exportCanvas.width = drawingArea.clientWidth;
@@ -605,6 +610,12 @@ function saveImage() {
     link.download = "drawing.png";
     link.href = exportCanvas.toDataURL();
     link.click();
+    divEffectsConfig.txt_message.text = "Exported succesfully!";
+    divEffectsConfig.mainmsg.backgroundColor = "rgba(89, 187, 82, 0.7)";
+    divEffectsConfig.icons_alert.text ="check_circle";
+    divEffectsConfig.mainmsg.borderColor = "green";
+    divEffectsConfig.mainmsg.dispay = "flex";
+    applyMessageData(divEffectsConfig);
 }
 
 // save as ora
@@ -622,7 +633,12 @@ ${stack}
 
 async function downloadORA() {
     if(layers.length <= 0){
-        alert("their is not layer for download");
+        divEffectsConfig.txt_message.text = "No layer found!";
+        divEffectsConfig.mainmsg.backgroundColor = "rgba(157, 81, 97, 0.7)";
+        divEffectsConfig.icons_alert.text ="warning";
+        divEffectsConfig.mainmsg.borderColor = "red";
+        divEffectsConfig.mainmsg.dispay = "flex";
+        applyMessageData(divEffectsConfig);
         return;
     }
     const zip = new JSZip();
@@ -654,16 +670,19 @@ async function downloadORA() {
       console.log(`Added layer ${i} blob to zip.`);
     }
   
-    console.log("All layers processed, generating zip...");
     const content = await zip.generateAsync({ type: "blob" });
-    console.log("Zip generated, starting download.");
-  
     const link = document.createElement("a");
     link.href = URL.createObjectURL(content);
     link.download = "project.ora";
     link.click();
-  
-    console.log("Download triggered.");
+
+
+    divEffectsConfig.txt_message.text = "Exported succesfully!";
+    divEffectsConfig.mainmsg.backgroundColor = "rgba(89, 187, 82, 0.7)";
+    divEffectsConfig.icons_alert.text ="check_circle";
+    divEffectsConfig.mainmsg.borderColor = "green";
+    divEffectsConfig.mainmsg.dispay = "flex";
+    applyMessageData(divEffectsConfig);
   }
   
   
@@ -785,6 +804,98 @@ async function downloadORA() {
       return canvas.toDataURL('image/png'); // Base64 PNG
     }
 
+
+
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    let divEffectsConfig = {
+      mainmsg: {
+        backgroundColor: "rgba(14, 107, 58, 0.92)",
+        borderColor: " rgba(116, 229, 169, 0.61)",
+        duration: 5000, 
+        dispay: "none",
+
+      },
+    
+      icons_alert: {
+        color: "#ffffff",
+        text: "people",
+      },
+    
+      txt_message: {
+        text: "Hi user, welcome!",
+      },
+    
+      txt_message_btn1: {
+        color: "#ffffff",
+        display: "none", 
+        alignItems: "center",
+        bgcolor: "red",
+        text: "OK",
+      },
+    
+      txt_message_btn2: {
+        color: "#ffffff",
+        backgroundColor: "red", 
+        borderColor: "red",
+        display: "none", 
+        text: "cancel",
+      },
+    };
+    let applyMessageData = (data) => {
+      // Container
+      let msg_alert = document.getElementById("message_alert");
+      Object.assign(msg_alert.style, data.mainmsg, {
+        display: data.mainmsg.dispay
+      });
+  
+      // Icon
+      let icon_alert = document.getElementById("message_alert_id");
+      icon_alert.innerHTML = data.icons_alert.text;
+      Object.assign(icon_alert.style, {
+        color: data.icons_alert.color,
+ 
+      });
+  
+      // Text
+      let text99 = document.getElementById("message_alert_txt");
+      text99.innerHTML = data.txt_message.text;
+      Object.assign(text99.style, {
+        // color: data.txt_message.color
+      });
+  
+      // Buttons
+      let btn11 = document.getElementById("message_alert_btn1");
+      btn11.innerHTML = data.txt_message_btn1.text;
+      Object.assign(btn11.style, {
+        color: data.txt_message_btn1.color,
+        backgroundColor: data.txt_message_btn1.bgcolor,
+        display:  data.txt_message_btn1.display
+      });
+  
+      let btn22 = document.getElementById("message_alert_btn2");
+      btn22.innerHTML = data.txt_message_btn2.text;
+      Object.assign(btn22.style, {
+        color: data.txt_message_btn2.color,
+        backgroundColor: data.txt_message_btn2.bgcolor,
+        display:  data.txt_message_btn2.display
+      });
+      hideshortmsg();
+
+    };
+    function hideshortmsg(){
+      setTimeout(() => {
+        divEffectsConfig.mainmsg.dispay = "none";
+        applyMessageData(divEffectsConfig);
+      }, divEffectsConfig.mainmsg.duration);
+    }
+    // 🟢 Apply settings
+    // applyMessageData(divEffectsConfig);
+    
+
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    
+
 // =================================================================================================================================
 // =================================================================================================================================
 // =================================================================================================================================
@@ -797,4 +908,5 @@ addLayer();
 document.getElementById("drawingArea").addEventListener('mousemove', () => {
     updateLayerPanel();
 });
+
 
